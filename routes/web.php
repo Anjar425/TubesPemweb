@@ -40,6 +40,6 @@ Route::middleware('auth:administrators')->group(function () {
 });
 
 Route::middleware('auth:regadmin')->group(function (){
-    Route::get('/dashboard', [AdministratorController::class, 'index'])->name('admin.dashboard');
+    Route::get('/dashboard-aaa', [AdministratorController::class, 'index'])->name('admin.dashboard');
 });
 
