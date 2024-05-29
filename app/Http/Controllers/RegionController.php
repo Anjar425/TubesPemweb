@@ -6,25 +6,19 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AdministratorController extends Controller
+class RegionController extends Controller
 {
     public function index(){
         if (Auth::guard('administrators')->check()) {
             $userId = Auth::guard('administrators')->user()->id;
             $region = Region::where('administrator_id', $userId)->get();
-            return view('Admininistrator.Dashboard.index');
+            return view('Admininistrator.Region.index', compact('region'));
         } else {
             return redirect("/")->withErrors('You are not allowed to access');
         }
     }
 
     public function insert(Request $request){
-        $existingPenduduk = Region::where('id', $request->id)->first();
-
-        if ($existingPenduduk) {
-            session()->flash('fail', 'Save Data Failed!');
-            return Redirect('/penduduk');
-        } else {
 
         $userId = Auth::guard('administrators')->user()->id;
 
@@ -34,7 +28,24 @@ class AdministratorController extends Controller
 
         $data -> save();
         session()->flash('success', 'Save Data Successfully!');
-        return Redirect('/dashboard');
-        }
+        return Redirect('/region');
+        
+    }
+
+    public function update(Request $request, $id)
+    {
+        $data = Region::where('id', $id)->first();
+            $data->name = $request->name;
+        $data -> save();
+        session()->flash('success', 'Edit Data Successfully!');
+        return redirect('/region');
+    }
+
+    public function delete(Request $request, $id)
+    {
+        $data = Region::where('id', $id);
+        $data->delete();
+        session()->flash('success', 'Delete Data Successfully!');
+        return redirect('/region');
     }
 }

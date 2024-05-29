@@ -44,6 +44,10 @@ return [
             'driver' => 'session',
             'provider' => 'administrators',
         ],
+        'regadmin' => [
+            'driver' => 'session',
+            'provider' => 'regadmin',
+        ],
     ],
 
     /*
@@ -71,6 +75,10 @@ return [
         'administrators' => [
             'driver' => 'eloquent',
             'model' => env('AUTH_MODEL', App\Models\Administrator::class),
+        ],
+        'regadmin' => [
+            'driver' => 'eloquent',
+            'model' => env('AUTH_MODEL', App\Models\RegionalAdmin::class),
         ],
 
         // 'users' => [

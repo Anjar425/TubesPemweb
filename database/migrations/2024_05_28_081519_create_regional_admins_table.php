@@ -12,12 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('regional_admins', function (Blueprint $table) {
-            $table->id();
+            $table->id()->primary();
             $table->foreignId('administrator_id')->constrained()->onDelete('cascade');
             $table->foreignId('regions_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');
+            $table->string('visible_password');
             $table->rememberToken();
             $table->timestamps();
         });

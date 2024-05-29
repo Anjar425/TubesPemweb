@@ -45,10 +45,10 @@ class SessionController extends Controller
     }
     
     public function loginForm (){
-        if (Auth::guard('administrators')->check()) {
+        if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
             return redirect()->intended('/dashboard');
         }
-        return view("login");
+        return view("Admininistrator.login");
     }
 
     public function login (Request $request) {
@@ -83,7 +83,7 @@ class SessionController extends Controller
     }
 
     public function registerForm (){
-        return view('register');
+        return view('Admininistrator.register');
     }
 
     public function register (Request $request){
@@ -95,7 +95,7 @@ class SessionController extends Controller
         ]);
 
         if($validator -> fails()){
-            return $this->sendError('Validation Error.', $validator->errors());
+            return redirect();
         }
 
         $input = $request -> all();
@@ -106,5 +106,36 @@ class SessionController extends Controller
         event(new Registered($administrator));
 
         return redirect('login');   
+    }
+
+
+    public function loginFormRegAdmin(){
+        if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
+            return redirect()->intended('/dashboard-regadmin');
+        }
+        return view('loginRegionalAdmin');
+    }
+
+    public function loginRegAdmin (Request $request) {
+        $request->validate([
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::guard('regadmin')->attempt($credentials)) {
+            /** @var \App\Models\RegionalAdmin $regadmin **/
+            $regadmin = Auth::guard('regadmin')->user();
+            $token = $regadmin->createToken('MyApp')->plainTextToken;
+        
+            // Store the token for later use, if needed
+            session(['token' => $token]);
+        
+            return redirect()->intended('/dashboard-regadmin')->withSuccess('Logged in successfully');
+        }
+
+        return redirect()->intended('/login-regadmin')->withSuccess('Logged in Failed');
+
     }
 }
