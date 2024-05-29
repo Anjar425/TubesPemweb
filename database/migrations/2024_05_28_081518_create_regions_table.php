@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plant_classes', function (Blueprint $table) {
+        Schema::create('regions', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('administrator_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('location');
+            $table->string('area');
+            $table->string('status');
             $table->timestamps();
         });
     }
@@ -23,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plant_classes');
+        Schema::dropIfExists('regions');
     }
 };

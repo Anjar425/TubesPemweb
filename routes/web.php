@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AdminRegionController;
+use App\Http\Controllers\PlantController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SessionController;
 use App\Models\RegionalAdmin;
@@ -22,8 +23,9 @@ Route::post('/register', [SessionController::class,'register']);
 
 Route::post('/logout', [SessionController::class, 'logout']);
 
+Route::get('/dashboard', [AdministratorController::class, 'index'])->name('admin.dashboard');
+
 Route::middleware('auth:administrators')->group(function () {
-    Route::get('/dashboard', [AdministratorController::class, 'index'])->name('admin.dashboard');
     Route::controller(RegionController::class)-> group(function (){
         Route::get('/region', 'index');
         Route::post('/insert-region', 'insert');
@@ -40,6 +42,11 @@ Route::middleware('auth:administrators')->group(function () {
 });
 
 Route::middleware('auth:regadmin')->group(function (){
-    Route::get('/dashboard-aaa', [AdministratorController::class, 'index'])->name('admin.dashboard');
+    Route::controller(PlantController::class)->group(function (){
+        Route::get('/plants', 'index');
+        Route::post('/insert-plants', 'insert');
+        Route::post('/{id}/update-plants', 'update');
+        Route::post('/{id}/delete-plants', 'delete');
+    });
 });
 

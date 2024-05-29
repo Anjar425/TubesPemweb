@@ -2,9 +2,9 @@
 @extends('Layout.notif')
 
 @section('navigation')
-    @include('Admininistrator.LinkDashboard')
+    @include('RegionalAdmin.LinkDashboard')
 @endsection
 
 @section('table')
-    <h1>Hallo bro</h1>
+    <h1>Hallo bro Nigga</h1>
 @endsection

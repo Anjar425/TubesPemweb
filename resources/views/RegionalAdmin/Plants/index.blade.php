@@ -2,11 +2,11 @@
 @extends('Layout.notif')
 
 @section('Title')
-    REGION
+    PLANTS
 @endsection
 
 @section('navigation')
-    @include('Admininistrator.LinkDashboard')
+    @include('RegionalAdmin.LinkDashboard')
 @endsection
 
 @section('table')
@@ -17,16 +17,34 @@
                     Id
                 </th>
                 <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
-                    Name Region
+                    Name
                 </th>
                 <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
-                    Location
+                    Leaf Width
                 </th>
                 <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
-                    Area
+                    Image
                 </th>
                 <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
-                    Status
+                    Class
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Type
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Height
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Diameter
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Leaf Color
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Watering Frequency
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Light Intensity
                 </th>
                 <th class="py-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
                     Action
@@ -34,7 +52,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($region as $p)
+            @foreach ($plant as $p)
                 <tr class="hover:bg-[#f5f5f5]">
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->id }}
@@ -42,11 +60,23 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->name }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->location }}</td>
+                        {{ $p->leaf_width }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->area }}</td>
+                        {{ $p->image }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->status }}</td>
+                        {{ $p->class }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->type }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->height }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->diameter }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->leaf_color }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->watering_frequency }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->light_intensity }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         <div class="flex flex-row gap-x-2 justify-center">
                             <button type="button" onclick="openEditModal('{{ $p->id }}')"
@@ -61,10 +91,11 @@
     </table>
 @endsection
 
+
 @section('Insert Modal')
-    @include('Admininistrator.Region.InsertModal')
+    @include('RegionalAdmin.Plants.InsertModal')
 @endsection
 
 @section('Edit Modal')
-    @include('Admininistrator.Region.EditModal')
+    @include('RegionalAdmin.Plants.EditModal')
 @endsection

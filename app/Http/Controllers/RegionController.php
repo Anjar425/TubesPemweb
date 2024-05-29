@@ -25,6 +25,9 @@ class RegionController extends Controller
         $data = new Region();
             $data->name = $request->name;
             $data->administrator_id = $userId;
+            $data->location = $request->location;
+            $data->area = $request->area;
+            $data->status = $request->status;
 
         $data -> save();
         session()->flash('success', 'Save Data Successfully!');
@@ -36,6 +39,10 @@ class RegionController extends Controller
     {
         $data = Region::where('id', $id)->first();
             $data->name = $request->name;
+            $data->location = $request->location;
+            $data->area = $request->area;
+            $data->status = $request->status;
+
         $data -> save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/region');

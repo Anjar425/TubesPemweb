@@ -13,6 +13,10 @@ class AdministratorController extends Controller
             $userId = Auth::guard('administrators')->user()->id;
             $region = Region::where('administrator_id', $userId)->get();
             return view('Admininistrator.Dashboard.index');
+        } else if (Auth::guard('regadmin')->check()) {
+            $userId = Auth::guard('regadmin')->user()->id;
+            $region = Region::where('administrator_id', $userId)->get();
+            return view('RegionalAdmin.Dashboard.index');
         } else {
             return redirect("/")->withErrors('You are not allowed to access');
         }

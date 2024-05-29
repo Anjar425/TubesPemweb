@@ -18,7 +18,7 @@ class RegionalAdmin extends Authenticatable
     protected $fillable = [
         'id',
         'administrator_id',
-        'regions_id',
+        'region_id',
         'name',
         'email',
         'password',
@@ -29,7 +29,6 @@ class RegionalAdmin extends Authenticatable
         'password',
         'remember_token',
     ];
-
     public function administrator()
     {
         return $this->belongsTo(Administrator::class);

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('regional_admins', function (Blueprint $table) {
             $table->id()->primary();
             $table->foreignId('administrator_id')->constrained()->onDelete('cascade');
-            $table->foreignId('regions_id')->constrained()->onDelete('cascade');
+            $table->foreignId('region_id')->constrained()->onDelete('cascade');
             $table->string('name');
             $table->string('email')->unique();
             $table->string('password');

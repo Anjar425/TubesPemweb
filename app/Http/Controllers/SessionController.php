@@ -75,7 +75,12 @@ class SessionController extends Controller
     }
 
     public function logout (Request $request) {
-        Auth::guard('administrators')->logout();
+        if (Auth::guard('administrators')->check()){
+            Auth::guard('administrators')->logout();
+        } else if (Auth::guard('regadmin')->check()){
+            Auth::guard('regadmin')->logout();
+        }
+        
         $request->session()->invalidate();
         $request->session()->regenerateToken();
     
@@ -111,9 +116,9 @@ class SessionController extends Controller
 
     public function loginFormRegAdmin(){
         if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
-            return redirect()->intended('/dashboard-regadmin');
+            return redirect()->intended('/dashboard');
         }
-        return view('loginRegionalAdmin');
+        return view('RegionalAdmin.login');
     }
 
     public function loginRegAdmin (Request $request) {
@@ -132,7 +137,7 @@ class SessionController extends Controller
             // Store the token for later use, if needed
             session(['token' => $token]);
         
-            return redirect()->intended('/dashboard-regadmin')->withSuccess('Logged in successfully');
+            return redirect()->intended('/dashboard')->withSuccess('Logged in successfully');
         }
 
         return redirect()->intended('/login-regadmin')->withSuccess('Logged in Failed');

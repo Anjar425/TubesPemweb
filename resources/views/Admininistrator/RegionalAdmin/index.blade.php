@@ -46,7 +46,7 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->visible_password }}
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->regions_id }}
+                        {{ $p->region_id }}
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         <div class="flex flex-row gap-x-2 justify-center">
                             <button type="button" onclick="openEditModal('{{ $p->id }}')"

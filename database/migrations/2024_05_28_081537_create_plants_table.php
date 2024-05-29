@@ -13,8 +13,18 @@ return new class extends Migration
     {
         Schema::create('plants', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('plant_classes_id')->constrained()->onDelete('cascade');
+            $table->foreignId('regional_admins_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('leaf_width');
+            $table->string('image');
+            $table->string('class');
+            $table->string('type');
+            $table->integer('height');
+            $table->integer('diameter');
+            $table->string('leaf_color');
+            $table->string('watering_frequency');
+            $table->integer('light_intensity');
+
             $table->timestamps();
         });
     }

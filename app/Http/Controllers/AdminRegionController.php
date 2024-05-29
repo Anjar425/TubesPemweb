@@ -35,7 +35,7 @@ class AdminRegionController extends Controller
         $data = new RegionalAdmin();
             $data->name = $request->name;
             $data->administrator_id = $userId;
-            $data->regions_id = $request->regions_id;
+            $data->region_id = $request->regions_id;
             $data->name = $request->name;
             $data->email = $request->email;
             $data->password = bcrypt($request->password);
@@ -55,7 +55,7 @@ class AdminRegionController extends Controller
             $data->email = $request->email;
             $data->password = bcrypt($request->password);
             $data->visible_password = $request->password;
-            $data->regions_id = $request->regions_id;
+            $data->region_id = $request->regions_id;
         $data -> save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/region-admin');

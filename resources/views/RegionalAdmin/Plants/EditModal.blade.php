@@ -1,4 +1,4 @@
-@foreach ($region as $p)
+@foreach ($plant as $p)
     <div id="editModal{{  $p->id }}"
         class="hidden fixed inset-0 bg-gray-400 bg-opacity-60 justify-center items-center ">
         <div class="bg-gray-800 rounded-lg w-1/2">

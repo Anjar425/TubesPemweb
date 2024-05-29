@@ -12,16 +12,22 @@ class Region extends Model
     protected $table = "regions";
 
     protected $primaryKey = 'id';
-
     protected $fillable = [
-        'id',
         'administrator_id',
         'name',
+        'location',
+        'area',
+        'status',
     ];
-
+    
     public function administrator()
     {
         return $this->belongsTo(Administrator::class);
+    }
+
+    public function regionalAdmins()
+    {
+        return $this->hasMany(RegionalAdmin::class);
     }
 }
 
