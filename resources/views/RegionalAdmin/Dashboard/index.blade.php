@@ -6,5 +6,5 @@
 @endsection
 
 @section('table')
-    <h1>Hallo bro Nigga</h1>
+    <h1>Hallo bro </h1>
 @endsection

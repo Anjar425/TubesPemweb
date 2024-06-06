@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AdminRegionController;
+use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\PlantController;
+use App\Http\Controllers\PlantRegionController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SessionController;
+use App\Models\PlantRegion;
 use App\Models\RegionalAdmin;
 use Illuminate\Support\Facades\Route;
 
@@ -47,6 +50,20 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/insert-plants', 'insert');
         Route::post('/{id}/update-plants', 'update');
         Route::post('/{id}/delete-plants', 'delete');
+    });
+
+    Route::controller(PlantRegionController::class)->group(function (){
+        Route::get('/vegetation', 'index');
+        Route::post('/insert-vegetation', 'insert');
+        Route::post('/{id}/update-vegetation', 'update');
+        Route::post('/{id}/delete-vegetation', 'delete');
+    });
+
+    Route::controller(ClassesController::class)->group(function (){
+        Route::get('/class', 'index');
+        Route::post('/insert-class', 'insert');
+        Route::post('/{id}/update-class', 'update');
+        Route::post('/{id}/delete-class', 'delete');
     });
 });
 

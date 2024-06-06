@@ -96,7 +96,7 @@ class SessionController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:administrators',
             'password' => 'required',
-            'c_password' => 'required'
+            'c_password' => 'required|same:password'
         ]);
 
         if($validator -> fails()){

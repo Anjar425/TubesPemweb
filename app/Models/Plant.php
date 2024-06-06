@@ -18,7 +18,6 @@ class Plant extends Model
         'name',
         'leaf_width',
         'image',
-        'class',
         'type',
         'height',
         'diameter',
@@ -30,6 +29,11 @@ class Plant extends Model
     public function regionalAdmin()
     {
         return $this->belongsTo(RegionalAdmin::class);
+    }
+
+    public function plantClass()
+    {
+        return $this->belongsTo(Classes::class, 'class_id');
     }
 
     public function regions()

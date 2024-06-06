@@ -11,20 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plants', function (Blueprint $table) {
+        Schema::create('classes', function (Blueprint $table) {
             $table->id();
             $table->foreignId('regional_admins_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('leaf_width');
-            $table->string('image');
-            $table->string('class');
-            $table->string('type');
-            $table->integer('height');
-            $table->integer('diameter');
-            $table->string('leaf_color');
-            $table->string('watering_frequency');
-            $table->integer('light_intensity');
-
             $table->timestamps();
         });
     }
@@ -34,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('plants');
+        Schema::dropIfExists('classes');
     }
 };
