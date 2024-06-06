@@ -43,7 +43,7 @@ class SessionController extends Controller
 
         return response()->json($response, $code);
     }
-    
+
     public function loginForm (){
         if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
             return redirect()->intended('/dashboard');
@@ -63,10 +63,10 @@ class SessionController extends Controller
             /** @var \App\Models\Administrator $administrator **/
             $administrator = Auth::guard('administrators')->user();
             $token = $administrator->createToken('MyApp')->plainTextToken;
-        
+
             // Store the token for later use, if needed
             session(['token' => $token]);
-        
+
             return redirect()->intended('/dashboard')->withSuccess('Logged in successfully');
         }
 
@@ -80,11 +80,11 @@ class SessionController extends Controller
         } else if (Auth::guard('regadmin')->check()){
             Auth::guard('regadmin')->logout();
         }
-        
+
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    
-        return redirect('/login')->withSuccess('Logged out successfully');
+
+        return redirect('/')->withSuccess('Logged out successfully');
     }
 
     public function registerForm (){
@@ -110,7 +110,7 @@ class SessionController extends Controller
 
         event(new Registered($administrator));
 
-        return redirect('login');   
+        return redirect('login');
     }
 
 
@@ -133,10 +133,10 @@ class SessionController extends Controller
             /** @var \App\Models\RegionalAdmin $regadmin **/
             $regadmin = Auth::guard('regadmin')->user();
             $token = $regadmin->createToken('MyApp')->plainTextToken;
-        
+
             // Store the token for later use, if needed
             session(['token' => $token]);
-        
+
             return redirect()->intended('/dashboard')->withSuccess('Logged in successfully');
         }
 
