@@ -50,6 +50,6 @@
     @include('RegionalAdmin.Classes.InsertModal')
 @endsection
 
-{{-- @section('Edit Modal')
-    @include('RegionalAdmin.PlantRegion.EditModal')
-@endsection --}}
+@section('Edit Modal')
+    @include('RegionalAdmin.Classes.EditModal')
+@endsection

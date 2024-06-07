@@ -2,7 +2,7 @@
 @extends('Layout.notif')
 
 @section('Title')
-    REGION
+    VEGETATION REGION
 @endsection
 
 @section('navigation')

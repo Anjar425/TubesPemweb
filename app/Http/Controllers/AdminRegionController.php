@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Administrator;
+use App\Models\Region;
 use App\Models\RegionalAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -14,8 +15,9 @@ class AdminRegionController extends Controller
     public function index(){
         if (Auth::guard('administrators')->check()) {
             $userId = Auth::guard('administrators')->user()->id;
-            $RegionalAdmin = RegionalAdmin::where('administrator_id', $userId)->get();
-            return view('Admininistrator.RegionalAdmin.index', compact('RegionalAdmin'));
+            $region = Region::where('administrator_id', $userId)->get();
+            $RegionalAdmin = RegionalAdmin::where('administrator_id', $userId)->with('region')->get();
+            return view('Admininistrator.RegionalAdmin.index', compact('RegionalAdmin', 'region'));
         } else {
             return redirect("/")->withErrors('You are not allowed to access');
         }
