@@ -59,7 +59,7 @@
                             class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                             value="{{ $plant->diameter }}" required>
                     </div>
-                </div>
+                </div> 
 
                 <div class="flex flex-row gap-2">
                     <div class="basis-1/2 mb-5">
