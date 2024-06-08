@@ -2,7 +2,7 @@
     <div class="bg-gray-800 rounded-lg w-1/2">
         <form method="POST" action="insert-region-admin" class=" w-5/6 mx-auto my-5">
             @csrf
-            <h2 class="text-center font-semibold text-lg text-white">Insert Pendidikan</h2><br>
+            <h2 class="text-center font-semibold text-lg text-white">Insert Admin Region</h2><br>
 
             <div class="basis-1/2 mb-5">
                 <label for="name" class="block mb-2 text-sm font-medium  text-white">Username</label>
