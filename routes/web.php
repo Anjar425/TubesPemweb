@@ -47,6 +47,7 @@ Route::middleware('auth:administrators')->group(function () {
 Route::middleware('auth:regadmin')->group(function (){
     Route::controller(PlantController::class)->group(function (){
         Route::get('/plants', 'index');
+        Route::get('/plants/{id}/detail', 'show');
         Route::post('/insert-plants', 'insert');
         Route::post('/{id}/update-plants', 'update');
         Route::post('/{id}/delete-plants', 'delete');
