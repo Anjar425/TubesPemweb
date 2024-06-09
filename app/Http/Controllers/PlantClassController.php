@@ -20,7 +20,7 @@ class PlantClassController extends Controller
      */
     public function create()
     {
-        //
+        return view(create)
     }
 
     /**
@@ -44,7 +44,7 @@ class PlantClassController extends Controller
      */
     public function edit(PlantClass $plantClass)
     {
-        //
+        return view()
     }
 
     /**

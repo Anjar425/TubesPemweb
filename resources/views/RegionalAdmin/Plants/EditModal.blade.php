@@ -14,9 +14,9 @@
 
                 <div class="basis-1/2 mb-5">
                     <label for="image{{ $plant->id }}" class="block mb-2 text-sm font-medium text-white">Image</label>
-                    <input name="image" type="text" id="image{{ $plant->id }}"
+                    <input name="image" type="file" id="image{{ $plant->id }}"
                         class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ $plant->image }}" required>
+                        value="{{ $p->image }}" required>
                 </div>
 
                 <div class="flex flex-row gap-2">
@@ -37,9 +37,13 @@
                 <div class="flex flex-row gap-2">
                     <div class="basis-1/4 mb-5">
                         <label for="class_id{{ $plant->id }}" class="block mb-2 text-sm font-medium text-white">Class ID</label>
-                        <input name="class_id" type="text" id="class_id{{ $plant->id }}"
-                            class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                            value="{{ $plant->class_id }}" required>
+                        <select name="class_id" type="text" id="class_id"
+                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                        <option disabled selected>--Select Class ID--</option>
+                        @foreach ($classes as $c)
+                            <option value="{{ $c->id }}">{{ $c->id }} : {{ $c->name }}</option>
+                        @endforeach
+                    </select>
                     </div>
                     <div class="basis-1/4 mb-5">
                         <label for="type{{ $plant->id }}" class="block mb-2 text-sm font-medium text-white">Type</label>

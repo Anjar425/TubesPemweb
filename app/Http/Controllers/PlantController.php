@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PlantController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         if (Auth::guard('regadmin')->check()) {
             $userId = Auth::guard('regadmin')->user()->id;
             $classes = Classes::where('regional_admins_id', $userId)->get();
@@ -38,13 +39,17 @@ class PlantController extends Controller
             $data->name = $request->name;
             $data->leaf_width = $request->leaf_width;
             $data->class_id = $request->class_id;
-            $data->image = $request->image;
             $data->type = $request->type;
             $data->height = $request->height;
             $data->diameter = $request->diameter;
             $data->leaf_color = $request->leaf_color;
             $data->watering_frequency = $request->watering_frequency;
             $data->light_intensity = $request->light_intensity;
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/plants'), $imageName);
+            $data->image = 'images/plants/' . $imageName;
 
             // Save the new plant record to the database
             $data->save();
@@ -54,21 +59,27 @@ class PlantController extends Controller
         }
     }
 
+    public function show($id)
+    {
+        $plant = Plant::findOrFail($id);
+        return view('RegionalAdmin.Plants.detail', compact('plant'));
+    }
+
     public function update(Request $request, $id)
     {
         $data = Plant::where('id', $id)->first();
-            $data->name = $request->name;
-            $data->leaf_width = $request->leaf_width;
-            $data->class_id = $request->class_id;
-            $data->image = $request->image;
-            $data->type = $request->type;
-            $data->height = $request->height;
-            $data->diameter = $request->diameter;
-            $data->leaf_color = $request->leaf_color;
-            $data->watering_frequency = $request->watering_frequency;
-            $data->light_intensity = $request->light_intensity;
+        $data->name = $request->name;
+        $data->leaf_width = $request->leaf_width;
+        $data->class_id = $request->class_id;
+        $data->image = $request->file('image')->store('public/images');
+        $data->type = $request->type;
+        $data->height = $request->height;
+        $data->diameter = $request->diameter;
+        $data->leaf_color = $request->leaf_color;
+        $data->watering_frequency = $request->watering_frequency;
+        $data->light_intensity = $request->light_intensity;
 
-        $data -> save();
+        $data->save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/plants');
     }
