@@ -4,6 +4,24 @@
 <head>
     <title>DATABASE PROJECT</title>
     @vite('resources/css/app.css')
+        <!-- CSS Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+     
+        <!-- Leaflet.js -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+     
+        <!-- Leaflet Geosearch -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css">
+        <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.umd.js"></script>
+     
+        <!-- Leaflet Geosearch Providers -->
+        <script src="https://unpkg.com/geosearch/src/js/l.control.geosearch.js"></script>
+        <script src="https://unpkg.com/geosearch/src/js/l.geosearch.provider.google.js"></script>
+     
 </head>
 
 <body class=" min-h-screen bg-gradient-to-tr from-gray-950 from-60% to-gray-800 ">

@@ -71,13 +71,13 @@ class PlantController extends Controller
         $data->name = $request->name;
         $data->leaf_width = $request->leaf_width;
         $data->class_id = $request->class_id;
-        $data->image = $request->file('image')->store('public/images');
         $data->type = $request->type;
         $data->height = $request->height;
         $data->diameter = $request->diameter;
         $data->leaf_color = $request->leaf_color;
         $data->watering_frequency = $request->watering_frequency;
         $data->light_intensity = $request->light_intensity;
+
 
         $data->save();
         session()->flash('success', 'Edit Data Successfully!');
