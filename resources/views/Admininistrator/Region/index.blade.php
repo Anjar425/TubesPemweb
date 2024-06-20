@@ -70,6 +70,15 @@
             @endforeach
         </tbody>
     </table>
+
+    <div>
+        <a href="/region-export">Export</a>
+    </div>
+    <form action="/region-import" method="post" enctype="multipart/form-data">
+        @csrf
+        <input type="file" name="file">
+        <input type="submit" value="import">
+    </form>
 @endsection
 
 @section('button')
