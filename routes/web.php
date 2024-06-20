@@ -65,6 +65,8 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/insert-vegetation', 'insert');
         Route::post('/{id}/update-vegetation', 'update');
         Route::post('/{id}/delete-vegetation', 'delete');
+        Route::get('/vegetation/export', 'export');
+        Route::post('/vegetation/import', 'import');
     });
 
     Route::controller(ClassesController::class)->group(function (){
