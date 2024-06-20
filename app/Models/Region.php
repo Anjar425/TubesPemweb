@@ -19,7 +19,7 @@ class Region extends Model
         'name',
         'location',
         'area',
-        'latidude',
+        'latitude',
         'longitude',
         'status',
     ];
