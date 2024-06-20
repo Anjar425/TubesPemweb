@@ -18,7 +18,7 @@
             <div class="flex flex-row gap-2">
                 <div class=" basis-1/2 mb-5">
                     <label for="leaf_width" class="block mb-2 text-sm font-medium  text-white">leaf_width</label>
-                    <input name="leaf_width" type="text" id="leaf_width"
+                    <input name="leaf_width" type="number" step="0.01" id="leaf_width"
                         class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class=" basis-1/2 mb-5">
@@ -46,12 +46,12 @@
                 </div>
                 <div class=" basis-1/4 mb-5">
                     <label for="height" class="block mb-2 text-sm font-medium  text-white">height</label>
-                    <input name="height" type="text" id="height"
+                    <input name="height" type="number" step="0.01" id="height"
                         class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
                 <div class=" basis-1/4 mb-5">
                     <label for="diameter" class="block mb-2 text-sm font-medium  text-white">diameter</label>
-                    <input name="diameter" type="text" id="diameter"
+                    <input name="diameter" type="number" step="0.01" id="diameter"
                         class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
                 </div>
             </div>

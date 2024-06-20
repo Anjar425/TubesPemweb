@@ -43,16 +43,21 @@ Route::middleware('auth:administrators')->group(function () {
         Route::post('/insert-region-admin', 'insert');
         Route::post('/{id}/update-region-admin', 'update');
         Route::post('/{id}/delete-region-admin', 'delete');
+
+        Route::get('/region-admin/export', 'export');
+        Route::post('/region-admin/import', 'import');
     });
 });
 
 Route::middleware('auth:regadmin')->group(function (){
     Route::controller(PlantController::class)->group(function (){
         Route::get('/plants', 'index');
-        Route::get('/plants/{id}/eko', 'show');
+        Route::get('/plants/{id}/detail', 'show');
         Route::post('/insert-plants', 'insert');
         Route::post('/{id}/update-plants', 'update');
         Route::post('/{id}/delete-plants', 'delete');
+        Route::get('/plants/export', 'export');
+        Route::post('/plants/import', 'import');
     });
 
     Route::controller(PlantRegionController::class)->group(function (){
@@ -69,7 +74,7 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/{id}/delete-class', 'delete');
     });
 
-    
+
     Route::controller(MapController::class)->group(function (){
         Route::get('/map', 'index');
         Route::get('/markers', 'getMarkers');

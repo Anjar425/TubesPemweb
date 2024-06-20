@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PlantsExport;
+use App\Imports\PlantsImport;
 use App\Models\Classes;
 use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlantController extends Controller
 {
@@ -23,15 +26,23 @@ class PlantController extends Controller
 
     public function insert(Request $request)
     {
-        // Check if plant with the given ID already exists
-        $existingData = Plant::where('id', $request->id)->first();
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'leaf_width' => 'required|numeric',
+            'class_id' => 'required|integer',
+            'image' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'height' => 'required|numeric',
+            'diameter' => 'required|numeric',
+            'leaf_color' => 'required|string|max:255',
+            'watering_frequency' => 'required|string|max:255',
+            'light_intensity' => 'required|integer',
+        ]);
 
-        if ($existingData) {
-            session()->flash('fail', 'Save Data Failed! Plant with this ID already exists.');
-            return redirect('/plants');
-        } else {
-            // Get the authenticated regional admin's ID
-            $regionalAdminId = Auth::guard('regadmin')->user()->id;
+
+        $regionalAdminId = Auth::guard('regadmin')->user()->id;
+
+
 
             // Create a new Plant instance and fill it with data
             $data = new Plant();
@@ -54,23 +65,39 @@ class PlantController extends Controller
             // Save the new plant record to the database
             $data->save();
 
-            session()->flash('success', 'Save Data Successfully!');
-            return redirect('/plants');
-        }
+
+        session()->flash('success', 'Save Data Successfully!');
+        return redirect('/plants');
     }
 
     public function show($id)
     {
         $plant = Plant::findOrFail($id);
         return view('RegionalAdmin.Plants.detail', compact('plant'));
+
     }
 
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'leaf_width' => 'required|numeric',
+            'class_id' => 'required|integer',
+            'image' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'height' => 'required|numeric',
+            'diameter' => 'required|numeric',
+            'leaf_color' => 'required|string|max:255',
+            'watering_frequency' => 'required|string|max:255',
+            'light_intensity' => 'required|integer',
+        ]);
+
         $data = Plant::where('id', $id)->first();
         $data->name = $request->name;
         $data->leaf_width = $request->leaf_width;
         $data->class_id = $request->class_id;
+
+
         $data->type = $request->type;
         $data->height = $request->height;
         $data->diameter = $request->diameter;
@@ -78,17 +105,32 @@ class PlantController extends Controller
         $data->watering_frequency = $request->watering_frequency;
         $data->light_intensity = $request->light_intensity;
 
-
         $data->save();
+
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/plants');
     }
 
     public function delete(Request $request, $id)
     {
-        $data = Plant::where('id', $id);
+        $data = Plant::where('id', $id)->first();
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/plants');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PlantsExport, 'plants.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv,txt', // Adjust file types as necessary
+        ]);
+
+        Excel::import(new PlantsImport, $request->file('file'));
+        return redirect('/plants')->with('success', 'All good!');
     }
 }

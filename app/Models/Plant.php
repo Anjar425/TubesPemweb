@@ -17,6 +17,7 @@ class Plant extends Model
         'regional_admins_id',
         'name',
         'leaf_width',
+        'class_id',
         'image',
         'type',
         'height',
