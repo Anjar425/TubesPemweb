@@ -39,6 +39,7 @@ class PlantController extends Controller
             'light_intensity' => 'required|integer',
         ]);
 
+
         $regionalAdminId = Auth::guard('regadmin')->user()->id;
 
 
@@ -73,6 +74,7 @@ class PlantController extends Controller
     {
         $plant = Plant::findOrFail($id);
         return view('RegionalAdmin.Plants.detail', compact('plant'));
+
     }
 
     public function update(Request $request, $id)
@@ -95,14 +97,13 @@ class PlantController extends Controller
         $data->leaf_width = $request->leaf_width;
         $data->class_id = $request->class_id;
 
+
         $data->type = $request->type;
         $data->height = $request->height;
         $data->diameter = $request->diameter;
         $data->leaf_color = $request->leaf_color;
         $data->watering_frequency = $request->watering_frequency;
         $data->light_intensity = $request->light_intensity;
-
-
 
         $data->save();
 
