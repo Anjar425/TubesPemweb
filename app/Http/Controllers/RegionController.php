@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\RegionExport;
 
 class RegionController extends Controller
 {
@@ -54,5 +57,9 @@ class RegionController extends Controller
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/region');
+    }
+
+    public function export(){
+        return Excel::download(new RegionExport, 'region.xlsx');
     }
 }

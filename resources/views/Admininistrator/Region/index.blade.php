@@ -59,6 +59,10 @@
             @endforeach
         </tbody>
     </table>
+
+    <div>
+        <a href="/export">Export</a>
+    </div>
 @endsection
 
 @section('Insert Modal')

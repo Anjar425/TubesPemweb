@@ -32,6 +32,7 @@ Route::middleware('auth:administrators')->group(function () {
     Route::controller(RegionController::class)-> group(function (){
         Route::get('/region', 'index');
         Route::post('/insert-region', 'insert');
+        Route::get('/export', 'export');
         Route::post('/{id}/update-region', 'update');
         Route::post('/{id}/delete-region', 'delete');
     });
