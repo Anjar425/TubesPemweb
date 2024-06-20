@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RegionalAdminsExport;
+use App\Imports\RegionalAdminsImport;
 use App\Models\Administrator;
 use App\Models\Region;
 use App\Models\RegionalAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AdminRegionController extends Controller
 {
@@ -44,7 +47,7 @@ class AdminRegionController extends Controller
             $data->email = $request->email;
             $data->password = bcrypt($request->password);
             $data->visible_password = $request->password;
-            
+
 
         $data -> save();
         session()->flash('success', 'Save Data Successfully!');
@@ -55,7 +58,7 @@ class AdminRegionController extends Controller
     public function update(Request $request, $id)
     {
 
-        
+
         $data = RegionalAdmin::where('id', $id)->first();
             $data->name = $request->name;
             $data->email = $request->email;
@@ -73,5 +76,20 @@ class AdminRegionController extends Controller
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/region-admin');
+    }
+
+    public function export()
+    {
+        return Excel::download(new RegionalAdminsExport, 'RegionalAdmin.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'image' => 'required|file|mimes:xlsx,csv,txt', // Adjust file types as necessary
+        ]);
+
+        Excel::import(new RegionalAdminsImport, $request->file('image'));
+        return redirect('/plants')->with('success', 'All good!');
     }
 }

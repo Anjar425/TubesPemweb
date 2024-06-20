@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PlantsExport;
+use App\Imports\PlantsImport;
 use App\Models\Classes;
 use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlantController extends Controller
 {
@@ -90,5 +93,20 @@ class PlantController extends Controller
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/plants');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PlantsExport, 'plants.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv,txt', // Adjust file types as necessary
+        ]);
+
+        Excel::import(new PlantsImport, $request->file('file'));
+        return redirect('/plants')->with('success', 'All good!');
     }
 }
