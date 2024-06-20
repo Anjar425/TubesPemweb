@@ -15,12 +15,12 @@ return new class extends Migration
             $table->id();
             $table->foreignId('regional_admins_id')->constrained()->onDelete('cascade');
             $table->string('name');
-            $table->string('leaf_width');
+            $table->float('leaf_width');
             $table->foreignId('class_id')->constrained()->onDelete('cascade');
             $table->string('image');
             $table->string('type');
-            $table->integer('height');
-            $table->integer('diameter');
+            $table->float('height');
+            $table->float('diameter');
             $table->string('leaf_color');
             $table->string('watering_frequency');
             $table->integer('light_intensity');
