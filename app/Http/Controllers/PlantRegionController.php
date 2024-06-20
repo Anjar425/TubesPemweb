@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PlantRegionsExport;
+use App\Imports\PlantRegionsImport;
 use App\Models\Plant;
 use App\Models\PlantRegion;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class PlantRegionController extends Controller
 {
@@ -84,6 +88,23 @@ class PlantRegionController extends Controller
         $data = PlantRegion::where('id', $id);
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
+        return redirect('/vegetation');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PlantRegionsExport, 'plantregions.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx'
+        ]);
+
+        Excel::import(new PlantRegionsImport, $request->file('file'));
+
+        session()->flash('success', 'Import Data Successfully!');
         return redirect('/vegetation');
     }
 }
