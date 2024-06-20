@@ -62,7 +62,7 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->leaf_width }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->image }}</td>
+                        <img src="{{ $p->image }}" alt=""></td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->class_id }} : {{ $p->plantClass->name }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
@@ -79,6 +79,8 @@
                         {{ $p->light_intensity }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         <div class="flex flex-row gap-x-2 justify-center">
+                            <button type="button" 
+                                class=" text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-xs w-12 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500"><a href="plants/{{ $p->id }}/detail">Detail</a></button>
                             <button type="button" onclick="openEditModal('{{ $p->id }}')"
                                 class=" text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-xs w-12 py-2.5 text-center bg-green-600 hover:bg-green-700 focus:ring-green-500">Edit</button>
                             <button type="button" onclick="openDeleteModal('{{ url('/' . $p->id . '/delete-plants') }}')"
