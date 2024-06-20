@@ -41,6 +41,8 @@ Route::middleware('auth:administrators')->group(function () {
         Route::post('/insert-region-admin', 'insert');
         Route::post('/{id}/update-region-admin', 'update');
         Route::post('/{id}/delete-region-admin', 'delete');
+        Route::get('/export-region-admin', 'export');
+        Route::post('/import-region-admin', [AdminRegionController::class, 'import'])->name('regionAdmin.import');
     });
 });
 
