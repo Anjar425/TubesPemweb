@@ -10,23 +10,6 @@
 @endsection
 
 @section('table')
-    <div class="flex justify-between items-center mb-4">
-        <h1 class="text-lg font-semibold text-gray-800">Regional Admin Data</h1>
-        <a href="{{ url('/export-region-admin') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Export to Excel
-        </a>
-        <form action="{{ route('regionAdmin.import') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="flex">
-                    <input type="file" name="file" accept=".xlsx,.xls" class="py-2 px-4 rounded-l-lg border border-gray-300">
-                    <button type="submit" class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-r-lg">Import</button>
-                </div>
-                @error('file')
-                    <div class="text-red-500">{{ $message }}</div>
-                @enderror
-            </form>
-        </div>
-    </div>
     <table class="table-auto w-full border-collapse mt-1 overscroll-x-auto">
         <thead>
             <tr>
