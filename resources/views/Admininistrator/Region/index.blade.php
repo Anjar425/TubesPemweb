@@ -26,6 +26,12 @@
                     Area
                 </th>
                 <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Latitude
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
+                    Longitude
+                </th>
+                <th class="py-2 px-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
                     Status
                 </th>
                 <th class="py-2 border-b-[1px] text-sm border-b-gray-200 font-semibold text-gray-300 ">
@@ -46,7 +52,12 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->area }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->latitude }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
+                        {{ $p->longitude }}</td>
+                    <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->status }}</td>
+
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         <div class="flex flex-row gap-x-2 justify-center">
                             <button type="button" onclick="openEditModal('{{ $p->id }}')"
@@ -59,6 +70,12 @@
             @endforeach
         </tbody>
     </table>
+@endsection
+
+@section('button')
+    <button onclick="openInsertModal()"
+        class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+        data-toggle="modal" data-target="#myModal">Insert</button>
 @endsection
 
 @section('Insert Modal')

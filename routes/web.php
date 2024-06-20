@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdministratorController;
 use App\Http\Controllers\AdminRegionController;
 use App\Http\Controllers\ClassesController;
+use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\PlantRegionController;
 use App\Http\Controllers\RegionController;
@@ -23,14 +24,13 @@ Route::post('login-post', [SessionController::class,'login']);
 
 Route::get('/register', [SessionController::class, 'registerForm']);
 Route::post('/register', [SessionController::class,'register']);
-
 Route::post('/logout', [SessionController::class, 'logout']);
 
 Route::get('/dashboard', [AdministratorController::class, 'index'])->name('admin.dashboard');
 
 Route::middleware('auth:administrators')->group(function () {
     Route::controller(RegionController::class)-> group(function (){
-        Route::get('/region', 'index');
+        Route::get('/humam', 'index');
         Route::post('/insert-region', 'insert');
         Route::post('/{id}/update-region', 'update');
         Route::post('/{id}/delete-region', 'delete');
@@ -41,17 +41,21 @@ Route::middleware('auth:administrators')->group(function () {
         Route::post('/insert-region-admin', 'insert');
         Route::post('/{id}/update-region-admin', 'update');
         Route::post('/{id}/delete-region-admin', 'delete');
-        Route::get('/export-region-admin', 'export');
-        Route::post('/import-region-admin', [AdminRegionController::class, 'import'])->name('regionAdmin.import');
+
+        Route::get('/region-admin/export', 'export');
+        Route::post('/region-admin/import', 'import');
     });
 });
 
 Route::middleware('auth:regadmin')->group(function (){
     Route::controller(PlantController::class)->group(function (){
         Route::get('/plants', 'index');
+        Route::get('/plants/{id}/detail', 'show');
         Route::post('/insert-plants', 'insert');
         Route::post('/{id}/update-plants', 'update');
         Route::post('/{id}/delete-plants', 'delete');
+        Route::get('/plants/export', 'export');
+        Route::post('/plants/import', 'import');
     });
 
     Route::controller(PlantRegionController::class)->group(function (){
@@ -66,6 +70,12 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/insert-class', 'insert');
         Route::post('/{id}/update-class', 'update');
         Route::post('/{id}/delete-class', 'delete');
+    });
+
+
+    Route::controller(MapController::class)->group(function (){
+        Route::get('/map', 'index');
+        Route::get('/markers', 'getMarkers');
     });
 });
 

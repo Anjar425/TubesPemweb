@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PlantsExport;
+use App\Imports\PlantsImport;
 use App\Models\Classes;
 use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PlantController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         if (Auth::guard('regadmin')->check()) {
             $userId = Auth::guard('regadmin')->user()->id;
             $classes = Classes::where('regional_admins_id', $userId)->get();
@@ -35,25 +39,42 @@ class PlantController extends Controller
             'light_intensity' => 'required|integer',
         ]);
 
+
         $regionalAdminId = Auth::guard('regadmin')->user()->id;
 
-        $data = new Plant();
-        $data->regional_admins_id = $regionalAdminId;
-        $data->name = $request->name;
-        $data->leaf_width = $request->leaf_width;
-        $data->class_id = $request->class_id;
-        $data->image = $request->image;
-        $data->type = $request->type;
-        $data->height = $request->height;
-        $data->diameter = $request->diameter;
-        $data->leaf_color = $request->leaf_color;
-        $data->watering_frequency = $request->watering_frequency;
-        $data->light_intensity = $request->light_intensity;
 
-        $data->save();
+
+            // Create a new Plant instance and fill it with data
+            $data = new Plant();
+            $data->regional_admins_id = $regionalAdminId;
+            $data->name = $request->name;
+            $data->leaf_width = $request->leaf_width;
+            $data->class_id = $request->class_id;
+            $data->type = $request->type;
+            $data->height = $request->height;
+            $data->diameter = $request->diameter;
+            $data->leaf_color = $request->leaf_color;
+            $data->watering_frequency = $request->watering_frequency;
+            $data->light_intensity = $request->light_intensity;
+
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/plants'), $imageName);
+            $data->image = 'images/plants/' . $imageName;
+
+            // Save the new plant record to the database
+            $data->save();
+
 
         session()->flash('success', 'Save Data Successfully!');
         return redirect('/plants');
+    }
+
+    public function show($id)
+    {
+        $plant = Plant::findOrFail($id);
+        return view('RegionalAdmin.Plants.detail', compact('plant'));
+
     }
 
     public function update(Request $request, $id)
@@ -75,7 +96,8 @@ class PlantController extends Controller
         $data->name = $request->name;
         $data->leaf_width = $request->leaf_width;
         $data->class_id = $request->class_id;
-        $data->image = $request->image;
+
+
         $data->type = $request->type;
         $data->height = $request->height;
         $data->diameter = $request->diameter;
@@ -95,5 +117,20 @@ class PlantController extends Controller
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/plants');
+    }
+
+    public function export()
+    {
+        return Excel::download(new PlantsExport, 'plants.xlsx');
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv,txt', // Adjust file types as necessary
+        ]);
+
+        Excel::import(new PlantsImport, $request->file('file'));
+        return redirect('/plants')->with('success', 'All good!');
     }
 }

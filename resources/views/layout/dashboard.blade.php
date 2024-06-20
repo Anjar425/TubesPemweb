@@ -4,6 +4,24 @@
 <head>
     <title>DATABASE PROJECT</title>
     @vite('resources/css/app.css')
+        <!-- CSS Leaflet -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+        crossorigin=""/>
+
+        <!-- Leaflet.js -->
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+        integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+        crossorigin=""></script>
+
+        <!-- Leaflet Geosearch -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-geosearch@3.0.0/dist/geosearch.css">
+        <script src="https://unpkg.com/leaflet-geosearch@3.1.0/dist/geosearch.umd.js"></script>
+
+        <!-- Leaflet Geosearch Providers -->
+        <script src="https://unpkg.com/geosearch/src/js/l.control.geosearch.js"></script>
+        <script src="https://unpkg.com/geosearch/src/js/l.geosearch.provider.google.js"></script>
+
 </head>
 
 <body class=" min-h-screen bg-gradient-to-tr from-gray-950 from-60% to-gray-800 ">
@@ -33,13 +51,10 @@
                 <div
                     class=" mb-20 flex flex-col w-11/12 rounded-xl items-center place-content-center bg-gray-800/50 bg-gradient-to-bl from-gray-700/50 via-transparent">
                     <div class="w-11/12 overflow-x-scroll overscroll-x-auto">
-
                         @yield('table')
                     </div>
                     <div class="w-11/12">
-                        <button onclick="openInsertModal()"
-                            class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-                            data-toggle="modal" data-target="#myModal">Insert</button>
+                        @yield('button')
                     </div>
                 </div>
             </div>
@@ -47,6 +62,7 @@
     </div>
     @yield('Insert Modal')
     @yield('Edit Modal')
+    @yield('Import Modal')
     @include('Layout.delete')
 
     <script>
@@ -60,6 +76,18 @@
             var insertModal = document.getElementById('insertModal');
             insertModal.classList.add('hidden');
             insertModal.classList.remove('flex');
+        }
+
+        function openImportModal() {
+            var ImportModal = document.getElementById('ImportModal');
+            ImportModal.classList.remove('hidden');
+            ImportModal.classList.add('flex');
+        }
+
+        function closeImportModal() {
+            var ImportModal = document.getElementById('ImportModal');
+            ImportModal.classList.add('hidden');
+            ImportModal.classList.remove('flex');
         }
 
         function openEditModal(x) {

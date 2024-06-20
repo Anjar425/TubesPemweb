@@ -63,7 +63,7 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->visible_password }}
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->region_id }}
+                        {{ $p->region_id }} : {{ $p->region->name }}
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         <div class="flex flex-row gap-x-2 justify-center">
                             <button type="button" onclick="openEditModal('{{ $p->id }}')"
@@ -77,6 +77,25 @@
             @endforeach
         </tbody>
     </table>
+@endsection
+
+
+@section('button')
+    <button onclick="openInsertModal()"
+        class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+        data-toggle="modal" data-target="#myModal">Insert</button>
+
+    <a href="/region-admin/export" class="text-xl"> <button
+            class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+            data-toggle="modal" data-target="#myModal">Export</button></a>
+
+    <a class="text-xl"> <button onclick="openImportModal()"
+            class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+            data-toggle="modal" data-target="#myModal">Import</button></a>
+@endsection
+
+@section('Import Modal')
+    @include('Admininistrator.RegionalAdmin.ImportModal')
 @endsection
 
 @section('Insert Modal')

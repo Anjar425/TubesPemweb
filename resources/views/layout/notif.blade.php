@@ -1,5 +1,4 @@
 @if (Session::has('success'))
-
     <div id="alertContainer" class="w-72 fixed right-0 top-[66px] z-50 opacity-0 transition-opacity duration-1000"
         role="alert">
         <div class="bg-green-500 text-white font-bold rounded-t px-4 py-2">

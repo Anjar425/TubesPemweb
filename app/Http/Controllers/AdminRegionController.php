@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RegionalAdminsExport;
+use App\Imports\RegionalAdminsImport;
 use App\Models\Administrator;
+use App\Models\Region;
 use App\Models\RegionalAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,14 +13,18 @@ use App\Imports\RegionAdminImport;
 use App\Exports\RegionAdminExport; // Import class eksport yang sudah dibuat
 use Maatwebsite\Excel\Facades\Excel; // Import facade Excel
 
+
 class AdminRegionController extends Controller
 {
     public function index()
     {
         if (Auth::guard('administrators')->check()) {
             $userId = Auth::guard('administrators')->user()->id;
-            $RegionalAdmin = RegionalAdmin::where('administrator_id', $userId)->get();
-            return view('Admininistrator.RegionalAdmin.index', compact('RegionalAdmin'));
+            $region = Region::where('administrator_id', $userId)->get();
+            $RegionalAdmin = RegionalAdmin::where('administrator_id', $userId)
+                ->with('region')
+                ->get();
+            return view('Admininistrator.RegionalAdmin.index', compact('RegionalAdmin', 'region'));
         } else {
             return redirect("/")->withErrors('You are not allowed to access');
         }
@@ -35,13 +42,15 @@ class AdminRegionController extends Controller
         $userId = Auth::guard('administrators')->user()->id;
 
         $data = new RegionalAdmin();
-        $data->name = $request->name;
-        $data->administrator_id = $userId;
-        $data->region_id = $request->regions_id;
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = bcrypt($request->password);
-        $data->visible_password = $request->password;
+
+            $data->name = $request->name;
+            $data->administrator_id = $userId;
+            $data->region_id = $request->regions_id;
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->password = bcrypt($request->password);
+            $data->visible_password = $request->password;
+
 
         $data->save();
         session()->flash('success', 'Save Data Successfully!');
@@ -50,13 +59,17 @@ class AdminRegionController extends Controller
 
     public function update(Request $request, $id)
     {
-        $data = RegionalAdmin::findOrFail($id);
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = bcrypt($request->password);
-        $data->visible_password = $request->password;
-        $data->region_id = $request->regions_id;
-        $data->save();
+
+
+
+        $data = RegionalAdmin::where('id', $id)->first();
+            $data->name = $request->name;
+            $data->email = $request->email;
+            $data->password = bcrypt($request->password);
+            $data->visible_password = $request->password;
+            $data->region_id = $request->regions_id;
+        $data -> save();
+      
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/region-admin');
     }
@@ -75,6 +88,7 @@ class AdminRegionController extends Controller
         $fileName = 'regional_admins_' . date('Ymd_His') . '.xlsx';
 
         return Excel::download(new RegionAdminExport($userId), $fileName);
+
     }
 
     public function import(Request $request)
@@ -92,5 +106,6 @@ class AdminRegionController extends Controller
         // Jika terjadi error, tampilkan pesan error dan redirect kembali
         return redirect('/region-admin')->withErrors('Failed to import data: ' . $e->getMessage());
     }
+
     }
 }

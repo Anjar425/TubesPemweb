@@ -12,12 +12,15 @@ class Region extends Model
     protected $table = "regions";
 
     protected $primaryKey = 'id';
+    
     protected $fillable = [
         'id',
         'administrator_id',
         'name',
         'location',
         'area',
+        'latidude',
+        'longitude',
         'status',
     ];
     

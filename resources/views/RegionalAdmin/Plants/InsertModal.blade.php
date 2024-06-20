@@ -1,8 +1,8 @@
 <div id="insertModal" class="hidden fixed inset-0 bg-gray-400 bg-opacity-60 justify-center items-center ">
     <div class="bg-gray-800 rounded-lg w-1/2">
-        <form method="POST" action="insert-plants" class=" w-5/6 mx-auto my-5">
+        <form method="POST" action="insert-plants" enctype="multipart/form-data" class=" w-5/6 mx-auto my-5">
             @csrf
-            <h2 class=" text-center font-semibold text-lg text-white">Insert Region</h2><br>
+            <h2 class=" text-center font-semibold text-lg text-white">Insert Plant</h2><br>
 
             <div class=" basis-1/2 mb-5">
                 <label for="name" class="block mb-2 text-sm font-medium  text-white">Name</label>
@@ -12,7 +12,7 @@
 
             <div class=" basis-1/2 mb-5">
                 <label for="image" class="block mb-2 text-sm font-medium  text-white">image</label>
-                <input name="image" type="text" id="image"
+                <input name="image" type="file" id="image"
                     class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
             </div>
             <div class="flex flex-row gap-2">
@@ -33,10 +33,10 @@
                     <label for="class_id" class="block mb-2 text-sm font-medium  text-white">class_id</label>
                     <select name="class_id" type="text" id="class_id"
                         class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
-                    <option disabled selected>--Select Class ID--</option>
-                    @foreach ($classes as $c)
-                        <option value="{{ $c->id }}">{{ $c->id }} : {{ $c->name }}</option>
-                    @endforeach
+                        <option disabled selected>--Select Class ID--</option>
+                        @foreach ($classes as $c)
+                            <option value="{{ $c->id }}">{{ $c->id }} : {{ $c->name }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class=" basis-1/4 mb-5">

@@ -1,34 +1,16 @@
-@foreach ($region as $p)
+@foreach ($class as $p)
     <div id="editModal{{  $p->id }}"
         class="hidden fixed inset-0 bg-gray-400 bg-opacity-60 justify-center items-center ">
         <div class="bg-gray-800 rounded-lg w-1/2">
-            <form method="POST" action="{{ url('/' . $p->id . '/update-region') }}" class=" w-5/6 mx-auto my-5">
+            <form method="POST" action="{{ url('/' . $p->id . '/update-class') }}" class=" w-5/6 mx-auto my-5">
                 @csrf
-                <h2 class=" text-center font-semibold text-lg text-white">Edit Region</h2><br>
+                <h2 class=" text-center font-semibold text-lg text-white">Edit Plant Class</h2><br>
 
-                <div class="basis-1/2 mb-5">
-                    <label for="name" class="block mb-2 text-sm font-medium  text-white">Name</label>
+                <div class=" basis-1/2 mb-5">
+                    <label for="name" class="block mb-2 text-sm font-medium  text-white">Name Class</label>
                     <input name="name" type="text" id="name"
-                        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ $p->name }}" required>
-                </div>
-                <div class="basis-1/2 mb-5">
-                    <label for="location" class="block mb-2 text-sm font-medium  text-white">Location</label>
-                    <input name="location" type="text" id="location"
-                        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ $p->location }}" required>
-                </div>
-                <div class="basis-1/2 mb-5">
-                    <label for="area" class="block mb-2 text-sm font-medium  text-white">Area</label>
-                    <input name="area" type="text" id="area"
-                        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ $p->area }}" required>
-                </div>
-                <div class="basis-1/2 mb-5">
-                    <label for="status" class="block mb-2 text-sm font-medium  text-white">Status</label>
-                    <input name="status" type="text" id="status"
-                        class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ $p->status }}" required>
+                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" 
+                        value="{{ $p->name }}">
                 </div>
                 <div class="flex flex-row gap-3">
                     <button type="submit"

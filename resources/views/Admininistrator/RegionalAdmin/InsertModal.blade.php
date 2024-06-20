@@ -2,7 +2,9 @@
     <div class="bg-gray-800 rounded-lg w-1/2">
         <form method="POST" action="insert-region-admin" class=" w-5/6 mx-auto my-5">
             @csrf
-            <h2 class="text-center font-semibold text-lg text-white">Insert Admin Region</h2><br>
+
+
+            <h2 class="text-center font-semibold text-lg text-white">Insert Regional Admin</h2><br>
 
             <div class="basis-1/2 mb-5">
                 <label for="name" class="block mb-2 text-sm font-medium  text-white">Username</label>
@@ -21,8 +23,13 @@
             </div>
             <div class=" basis-1/2 mb-5">
                 <label for="regions_id" class="block mb-2 text-sm font-medium  text-white">Region</label>
-                <input name="regions_id" type="text" id="regions_id"
+                <select name="regions_id" type="text" id="regions_id"
                     class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                    <option disabled selected>--Select Region ID--</option>
+                    @foreach ($region as $c)
+                        <option value="{{ $c->id }}">{{ $c->id }} : {{ $c->name }}</option>
+                    @endforeach
+                </select>
             </div>
             <div class="flex flex-row gap-3">
                 <button type="submit"
