@@ -30,6 +30,8 @@ class RegionController extends Controller
             $data->administrator_id = $userId;
             $data->location = $request->location;
             $data->area = $request->area;
+            $data->latitude = $request->latitude;
+            $data->longitude = $request->longitude;
             $data->status = $request->status;
 
         $data -> save();
