@@ -10,6 +10,7 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
 
 
 class PlantRegionController extends Controller
@@ -47,6 +48,7 @@ class PlantRegionController extends Controller
 
 
 
+
         // $regionId = Auth::guard('regadmin')->user()->region_id;
 
 
@@ -59,7 +61,7 @@ class PlantRegionController extends Controller
         $data->save();
         session()->flash('success', 'Save Data Successfully!');
         return redirect('/vegetation');
-    }
+
     public function update(Request $request, $id)
     {
 
@@ -96,5 +98,22 @@ class PlantRegionController extends Controller
 
         session()->flash('success', 'Import Data Successfully!');
         return redirect('/vegetation');
+    }
+
+    public function exportPdf()
+    {
+        $userId = Auth::guard('regadmin')->user()->id;
+        $administratorId = Auth::guard('regadmin')->user()->administrator_id;
+
+        $regions = Region::where('administrator_id', $administratorId)->get();
+        $regionIds = $regions->pluck('id');
+
+        $plantRegions = PlantRegion::whereIn('region_id', $regionIds)->with('plant', 'region')->get();
+
+        $pdf = new Mpdf();
+        $html = view('exports.plantregions_pdf', compact('plantRegions'))->render();
+        $pdf->WriteHTML($html);
+
+        return $pdf->Output('plantregions.pdf', 'D');
     }
 }

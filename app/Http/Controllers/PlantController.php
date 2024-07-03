@@ -9,6 +9,8 @@ use App\Models\Plant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\PlantsExportPdf;
+use Mpdf\Mpdf;
 
 class PlantController extends Controller
 {
@@ -132,5 +134,17 @@ class PlantController extends Controller
 
         Excel::import(new PlantsImport, $request->file('file'));
         return redirect('/plants')->with('success', 'All good!');
+    }
+    
+    public function exportPdf()
+    {
+        $userId = Auth::guard('regadmin')->user()->id;
+        $plants = Plant::where('regional_admins_id', $userId)->with('plantClass')->get();
+
+        $pdf = new Mpdf();
+        $html = view('exports.plants_pdf', compact('plants'))->render();
+        $pdf->WriteHTML($html);
+
+        return $pdf->Output('plants.pdf', 'D');
     }
 }
