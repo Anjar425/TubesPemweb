@@ -26,6 +26,20 @@
                         @endforeach
                     </select>
                 </div>
+                <div class="flex flex-row gap-2">
+                    <div class=" basis-1/2 mb-5">
+                        <label for="latitude" class="block mb-2 text-sm font-medium  text-white">Latitude</label>
+                        <input name="latitude" type="text" id="latitude" value="{{ $pr->latitude }}"
+                            class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+                    <div class=" basis-1/2 mb-5">
+                        <label for="longitude" class="block mb-2 text-sm font-medium  text-white">Longitude</label>
+                        <input name="longitude" type="text" id="longitude" value="{{ $pr->longitude }}"
+                            class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                            required>
+                    </div>
+                </div>
                 <div class="flex flex-row gap-3">
                     <button type="submit"
                         class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mb-5">Submit</button>

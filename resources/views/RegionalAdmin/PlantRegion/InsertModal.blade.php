@@ -7,7 +7,8 @@
             <div class=" basis-1/2 mb-5">
                 <label for="region_id" class="block mb-2 text-sm font-medium  text-white">Region ID</label>
                 <select name="region_id" type="text" id="region_id"
-                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" required >
+                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    required>
                     <option disabled selected>-- Select ID Region --</option>
                     @foreach ($region as $p)
                         <option value="{{ $p->id }}">{{ $p->id }} : {{ $p->name }}</option>
@@ -17,12 +18,27 @@
             <div class=" basis-1/2 mb-5">
                 <label for="plant_id" class="block mb-2 text-sm font-medium  text-white">Plant ID</label>
                 <select name="plant_id" type="text" id="plant_id"
-                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500" required >
+                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                    required>
                     <option disabled selected>-- Select ID Plant --</option>
                     @foreach ($plant as $p)
                         <option value="{{ $p->id }}">{{ $p->id }} : {{ $p->name }}</option>
                     @endforeach
                 </select>
+            </div>
+            <div class="flex flex-row gap-2">
+                <div class=" basis-1/2 mb-5">
+                    <label for="latitude" class="block mb-2 text-sm font-medium  text-white">Latitude</label>
+                    <input name="latitude" type="text" id="latitude"
+                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                        required>
+                </div>
+                <div class=" basis-1/2 mb-5">
+                    <label for="longitude" class="block mb-2 text-sm font-medium  text-white">Longitude</label>
+                    <input name="longitude" type="text" id="longitude"
+                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                        required>
+                </div>
             </div>
             <div class="flex flex-row gap-3">
                 <button type="submit"

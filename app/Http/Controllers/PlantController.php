@@ -26,18 +26,18 @@ class PlantController extends Controller
 
     public function insert(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'leaf_width' => 'required|numeric',
-            'class_id' => 'required|integer',
-            'image' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
-            'height' => 'required|numeric',
-            'diameter' => 'required|numeric',
-            'leaf_color' => 'required|string|max:255',
-            'watering_frequency' => 'required|string|max:255',
-            'light_intensity' => 'required|integer',
-        ]);
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'leaf_width' => 'required|numeric',
+        //     'class_id' => 'required|integer',
+        //     'image' => 'required|string|max:255',
+        //     'type' => 'required|string|max:255',
+        //     'height' => 'required|numeric',
+        //     'diameter' => 'required|numeric',
+        //     'leaf_color' => 'required|string|max:255',
+        //     'watering_frequency' => 'required|string|max:255',
+        //     'light_intensity' => 'required|integer',
+        // ]);
 
 
         $regionalAdminId = Auth::guard('regadmin')->user()->id;

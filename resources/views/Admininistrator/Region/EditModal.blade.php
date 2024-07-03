@@ -1,5 +1,5 @@
 @foreach ($region as $p)
-    <div id="editModal{{  $p->id }}"
+    <div id="editModal{{ $p->id }}"
         class="hidden fixed inset-0 bg-gray-400 bg-opacity-60 justify-center items-center ">
         <div class="bg-gray-800 rounded-lg w-1/2">
             <form method="POST" action="{{ url('/' . $p->id . '/update-region') }}" class=" w-5/6 mx-auto my-5">
@@ -24,18 +24,29 @@
                         class="border text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                         value="{{ $p->area }}" required>
                 </div>
-                <div class=" basis-1/2 mb-5">
-                    <label for="latitude" class="block mb-2 text-sm font-medium  text-white">Latitude</label>
-                    <input name="latitude" type="text" id="latitude"
-                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{$p->latitude}}">
+                <div id="coordinate-edit" class="flex flex-col gap-2 h-20 overflow-y-scroll">
+                    @foreach ($p->coordinates as $coordinate)
+                        <div class="flex flex-row gap-2">
+                            <div class=" basis-1/2 mb-5">
+                                <label for="latitude"
+                                    class="block mb-2 text-sm font-medium  text-white">Latitude</label>
+                                <input name="latitude[]" type="text" id="latitude"
+                                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                                    value="{{ $coordinate->latitude }}">
+                            </div>
+                            <div class=" basis-1/2 mb-5">
+                                <label for="longitude"
+                                    class="block mb-2 text-sm font-medium  text-white">Longitude</label>
+                                <input name="longitude[]" type="text" id="longitude"
+                                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
+                                    value="{{ $coordinate->longitude }}">
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
-                <div class=" basis-1/2 mb-5">
-                    <label for="longitude" class="block mb-2 text-sm font-medium  text-white">Longitude</label>
-                    <input name="longitude" type="text" id="longitude"
-                        class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                        value="{{$p->longitude}}">
-                </div>
+                <button type="button" id="add-coordinate-btn-edit"
+                    class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4">Add
+                    Coordinate</button>
                 <div class="basis-1/2 mb-5">
                     <label for="status" class="block mb-2 text-sm font-medium  text-white">Status</label>
                     <input name="status" type="text" id="status"
@@ -52,3 +63,30 @@
         </div>
     </div>
 @endforeach
+
+<script>
+    document.getElementById('add-coordinate-btn-edit').addEventListener('click', function() {
+        var coordinateDiv = document.getElementById('coordinate-edit');
+
+        // Create a new set of input elements
+        var newCoordinate = document.createElement('div');
+        newCoordinate.className = 'flex flex-row gap-2';
+        newCoordinate.innerHTML = `
+                <div class="flex flex-row gap-2 w-full">
+                    <div class=" basis-1/2 mb-5">
+                        <label for="latitude" class="block mb-2 text-sm font-medium  text-white">Latitude</label>
+                        <input name="latitude[]" type="text" id="latitude"
+                            class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                    <div class=" basis-1/2 mb-5">
+                        <label for="longitude" class="block mb-2 text-sm font-medium  text-white">Longitude</label>
+                        <input name="longitude[]" type="text" id="longitude"
+                            class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500">
+                    </div>
+                </div>
+        `;
+
+        // Append the new coordinate inputs to the coordinate div
+        coordinateDiv.appendChild(newCoordinate);
+    });
+</script>
