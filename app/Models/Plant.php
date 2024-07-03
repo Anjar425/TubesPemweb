@@ -29,7 +29,7 @@ class Plant extends Model
 
     public function regionalAdmin()
     {
-        return $this->belongsTo(RegionalAdmin::class);
+        return $this->belongsTo(RegionalAdmin::class, 'regional_admins_id');
     }
 
     public function plantClass()

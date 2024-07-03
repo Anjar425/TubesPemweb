@@ -4,8 +4,9 @@ namespace App\Imports;
 
 use App\Models\Plant;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
 
-class PlantsImport implements ToModel
+class PlantsImport implements ToModel, WithHeadingRow
 {
     /**
     * @param array $row
@@ -15,18 +16,18 @@ class PlantsImport implements ToModel
     public function model(array $row)
     {
         return new Plant([
-            'id' => $row[0],
-            'regional_admins_id' => $row[1],
-            'name' => $row[2],
-            'leaf_width' => $row[3],
-            'class_id' => $row[4],
-            'image' => $row[5],
-            'type' => $row[6],
-            'height' => $row[7],
-            'diameter' => $row[8],
-            'leaf_color' => $row[9],
-            'watering_frequency' => $row[10],
-            'light_intensity' => $row[11],
+            'id'                   => $row['id'],
+            'regional_admins_id'   => $row['regional_admin_id'],
+            'name'                 => $row['name'],
+            'leaf_width'           => $row['leaf_width'],
+            'class_id'             => $row['class_id'],
+            'image'                => $row['image'],
+            'type'                 => $row['type'],
+            'height'               => $row['height'],
+            'diameter'             => $row['diameter'],
+            'leaf_color'           => $row['leaf_color'],
+            'watering_frequency'   => $row['watering_frequency'],
+            'light_intensity'      => $row['light_intensity'],
         ]);
     }
 }
