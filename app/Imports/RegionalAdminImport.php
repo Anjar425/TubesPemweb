@@ -7,7 +7,7 @@ use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Illuminate\Support\Facades\Hash;
 
-class RegionAdminImport implements ToModel, WithHeadingRow
+class RegionalAdminImport implements ToModel, WithHeadingRow
 {
     /**
      * @param array $row

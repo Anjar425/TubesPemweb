@@ -6,6 +6,7 @@ use App\Http\Controllers\ClassesController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\PlantController;
 use App\Http\Controllers\PlantRegionController;
+use App\Http\Controllers\RegionalAdminController;
 use App\Http\Controllers\RegionController;
 use App\Http\Controllers\SessionController;
 use App\Models\PlantRegion;
@@ -36,16 +37,18 @@ Route::middleware('auth:administrators')->group(function () {
         Route::post('/region/import', 'import');
         Route::post('/{id}/update-region', 'update');
         Route::post('/{id}/delete-region', 'delete');
+        Route::get('/region/export-pdf', 'exportPdf');
+
     });
 
-    Route::controller(AdminRegionController::class)-> group(function (){
+    Route::controller(RegionalAdminController::class)-> group(function (){
         Route::get('/region-admin', 'index');
         Route::post('/insert-region-admin', 'insert');
         Route::post('/{id}/update-region-admin', 'update');
         Route::post('/{id}/delete-region-admin', 'delete');
-
         Route::get('/region-admin/export', 'export');
         Route::post('/region-admin/import', 'import');
+        Route::get('/region-admin/export-pdf',  'exportPdf');
     });
 });
 
@@ -58,6 +61,7 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/{id}/delete-plants', 'delete');
         Route::get('/plants/export', 'export');
         Route::post('/plants/import', 'import');
+        Route::get('/plants/export-pdf',  'exportPdf');
     });
 
     Route::controller(PlantRegionController::class)->group(function (){
@@ -67,6 +71,7 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/{id}/delete-vegetation', 'delete');
         Route::get('/vegetation/export', 'export');
         Route::post('/vegetation/import', 'import');
+        Route::get('/vegetation/export-pdf', 'exportPdf');
     });
 
     Route::controller(ClassesController::class)->group(function (){
@@ -74,6 +79,8 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/insert-class', 'insert');
         Route::post('/{id}/update-class', 'update');
         Route::post('/{id}/delete-class', 'delete');
+        Route::get('/classes/export', 'export');
+        Route::get('/classes/export-pdf', 'exportPdf');
     });
 
 

@@ -15,15 +15,15 @@ class RegionImport implements ToModel, WithHeadingRow
     */
     public function model(array $row)
     {
-        
+
         return new Region([
            'id'     => $row['id'],
-           'administrator_id'    => $row['administrator_id'], 
-           'name'    => $row['name'], 
-           'location'    => $row['location'], 
+           'administrator_id'    => $row['administrator_id'],
+           'name'    => $row['name'],
+           'location'    => $row['location'],
            'area'    => $row['area'],
-           'latitude'    => $row['latitude'], 
-           'longitude'    => $row['longitude'],  
+           'latitude'    => $row['latitude'],
+           'longitude'    => $row['longitude'],
            'status'    => $row['status']
         ]);
     }

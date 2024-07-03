@@ -2,7 +2,8 @@
 
 namespace App\Exports;
 
-use App\Models\Plant;
+use App\Models\RegionalAdmin;
+use Illuminate\Support\Collection;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithStyles;
@@ -12,14 +13,14 @@ use PhpOffice\PhpSpreadsheet\Style\Fill;
 use PhpOffice\PhpSpreadsheet\Style\Border;
 use PhpOffice\PhpSpreadsheet\Style\Font;
 
-class PlantsExport implements FromCollection, WithHeadings, WithStyles
+class RegionalAdminExport implements FromCollection, WithHeadings, WithStyles
 {
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        return Plant::all();
+        return RegionalAdmin::all()->makeVisible(['password']);
     }
 
     /**
@@ -29,17 +30,12 @@ class PlantsExport implements FromCollection, WithHeadings, WithStyles
     {
         return [
             'ID',
-            'Regional Admin ID',
+            'Administrator ID',
+            'Region ID',
             'Name',
-            'Leaf Width',
-            'Class ID',
-            'Image',
-            'Type',
-            'Height',
-            'Diameter',
-            'Leaf Color',
-            'Watering Frequency',
-            'Light Intensity',
+            'Email',
+            'Password',
+            'Visible Password',
             'Created At',
             'Updated At',
         ];
@@ -51,7 +47,7 @@ class PlantsExport implements FromCollection, WithHeadings, WithStyles
     public function styles(Worksheet $sheet)
     {
         // Style for table headers
-        $sheet->getStyle('A1:N1')->applyFromArray([
+        $sheet->getStyle('A1:I1')->applyFromArray([
             'font' => [
                 'name' => 'Times New Roman',
                 'bold' => true,
@@ -68,24 +64,24 @@ class PlantsExport implements FromCollection, WithHeadings, WithStyles
         ]);
 
         // Border for table headers and data
-        $sheet->getStyle('A1:N' . $sheet->getHighestRow())
+        $sheet->getStyle('A1:I' . $sheet->getHighestRow())
             ->getBorders()
             ->getAllBorders()
             ->setBorderStyle(Border::BORDER_THIN);
 
         // Center alignment for table headers and data
-        $sheet->getStyle('A1:N' . $sheet->getHighestRow())
+        $sheet->getStyle('A1:I' . $sheet->getHighestRow())
             ->getAlignment()
             ->setHorizontal(Alignment::HORIZONTAL_CENTER)
             ->setVertical(Alignment::VERTICAL_CENTER);
 
         // Font for table data
-        $sheet->getStyle('A2:N' . $sheet->getHighestRow())
+        $sheet->getStyle('A2:I' . $sheet->getHighestRow())
             ->getFont()
             ->setName('Times New Roman');
 
         // Autosize columns based on content
-        foreach (range('A', 'N') as $col) {
+        foreach (range('A', 'I') as $col) {
             $sheet->getColumnDimension($col)->setAutoSize(true);
         }
     }

@@ -38,26 +38,24 @@
         <div class="main " id="section1">
             <div id="content">
                 <p>Welcome</p>
-                <p>Welcome</p>
+                <p>Monitor Hijau Indonesia</p>
             </div>
         </div>
         <div class="admin " id="section2">
             <div class="description bg-whiteshadow dark:border dark:bg-gray-50 dark:border-gray-700">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni quasi dolorum sequi at architecto repudiandae
-                    alias voluptatum. Perferendis totam accusamus voluptatum, adipisci quaerat cum ullam sequi sunt temporibus! Suscipit, minima!</p>
+                <p>Selamat datang di halaman manajemen region. Untuk mengelola data region, harap masuk sebagai administrator. Di sini Anda dapat menambahkan, mengedit, dan menghapus informasi region, serta melakukan ekspor dan impor data untuk mempermudah pengelolaan. Silakan click tombol di bawah ini untuk masuk dan mulai mengelola data region.</p>
                 <a href="/login" class="main-link">Login Administrator</a>
             </div>
         </div>
         <div class="region" id="section3">
             <div class="description bg-whiteshadow dark:border dark:bg-gray-50 dark:border-gray-700">
-                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Magni quasi dolorum sequi at architecto repudiandae
-                    alias voluptatum. Perferendis totam accusamus voluptatum, adipisci quaerat cum ullam sequi sunt temporibus! Suscipit, minima!</p>
+                <p>Selamat datang di halaman manajemen region. Untuk mengelola data region, harap masuk sebagai region admin. Di sini Anda dapat menambahkan, mengedit, dan menghapus informasi region, serta melakukan ekspor dan impor data untuk mempermudah pengelolaan. Silakan gunakan tombol di bawah ini untuk masuk dan mulai mengelola data region.</p>
                 <a href="/login-regadmin" class="main-link">Login Region Admin</a>
             </div>
         </div>
     </main>
     <footer class="bg-gray-50 dark:bg-gray-900">
-        ini footer
+        Kelompok 5 - Kelas B
     </footer>
 </body>
 </html>

@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-
+use App\Exports\PlantRegionsExportpdf;
 use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Exports\RegionExport;
 use App\Imports\RegionImport;
+use App\Exports\RegionExportPdf;
 
 
 class RegionController extends Controller
@@ -39,7 +40,7 @@ class RegionController extends Controller
         $data -> save();
         session()->flash('success', 'Save Data Successfully!');
         return Redirect('/region');
-        
+
     }
 
     public function update(Request $request, $id)
@@ -69,7 +70,13 @@ class RegionController extends Controller
 
     public function import(Request $request){
         Excel::import(new RegionImport, $request->file('file'));
-        
+
         return redirect('/region')->with('success', 'All good!');
+    }
+
+    public function exportPdf()
+    {
+        $pdfExporter = new RegionExportpdf();
+        $pdfExporter->exportPdf();
     }
 }
