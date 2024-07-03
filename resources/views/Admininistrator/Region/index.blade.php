@@ -52,9 +52,16 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->area }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->latitude }}</td>
+                        @foreach ($p->coordinates as $coordinate)
+                            {{ $coordinate->latitude }} <br>
+                        @endforeach
+                    </td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->longitude }}</td>
+                        @foreach ($p->coordinates as $coordinate)
+                            {{ $coordinate->longitude }} <br>
+                        @endforeach
+                    </td>
+                    </td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->status }}</td>
 

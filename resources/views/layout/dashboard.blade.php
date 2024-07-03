@@ -50,7 +50,7 @@
                 <h1 class="text-center text-xl font-bold my-3 text-white ">@yield('Title')</h1>
                 <div
                     class=" mb-20 flex flex-col w-11/12 rounded-xl items-center place-content-center bg-gray-800/50 bg-gradient-to-bl from-gray-700/50 via-transparent">
-                    <div class="w-11/12 overflow-x-scroll overscroll-x-auto">
+                    <div class="w-11/12 overflow-x-scroll overscroll-x-auto ">
                         @yield('table')
                     </div>
                     <div class="w-11/12">

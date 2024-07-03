@@ -41,44 +41,35 @@ class PlantRegionController extends Controller
     {
         $request->validate([
             'plant_id' => 'required',
-            'region_id' => 'required'
+            'region_id' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
         ]);
 
-        $existingData = PlantRegion::where('plant_id', $request->plant_id)
-            ->where('region_id', $request->region_id)
-            ->first();
-
-        if ($existingData) {
-            session()->flash('fail', 'Data already exists!');
-            return redirect('/vegetation');
-        } else {
-
-            // $regionId = Auth::guard('regadmin')->user()->region_id;
 
 
-            $data = new PlantRegion();
-            $data->plant_id = $request->plant_id;
-            $data->region_id = $request->region_id;
 
-            $data->save();
-            session()->flash('success', 'Save Data Successfully!');
-            return redirect('/vegetation');
-        }
+        // $regionId = Auth::guard('regadmin')->user()->region_id;
 
-    }
+
+        $data = new PlantRegion();
+        $data->plant_id = $request->plant_id;
+        $data->region_id = $request->region_id;
+        $data->latitude = $request->latitude;
+        $data->longitude = $request->longitude;
+
+        $data->save();
+        session()->flash('success', 'Save Data Successfully!');
+        return redirect('/vegetation');
+
     public function update(Request $request, $id)
     {
-        $existingData = PlantRegion::where('plant_id', $request->plant_id)
-            ->where('region_id', $request->region_id)
-            ->first();
 
-        if ($existingData) {
-            session()->flash('fail', 'Data already exists!');
-            return redirect('/vegetation');
-        } else {
-            $data = PlantRegion::where('id', $id)->first();
-            $data->plant_id = $request->plant_id;
-        }
+        $data = PlantRegion::where('id', $id)->first();
+        $data->plant_id = $request->plant_id;
+        $data->latitude = $request->latitude;
+        $data->longitude = $request->longitude;
+
         $data->save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/vegetation');

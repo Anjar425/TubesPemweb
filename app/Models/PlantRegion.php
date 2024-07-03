@@ -13,6 +13,8 @@ class PlantRegion extends Model
     protected $fillable = [
         'region_id',
         'plant_id',
+        'latitude',
+        'longitude'
     ];
 
     public function region()
