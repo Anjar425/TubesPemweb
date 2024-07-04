@@ -61,7 +61,7 @@ class PlantRegionController extends Controller
         $data->save();
         session()->flash('success', 'Save Data Successfully!');
         return redirect('/vegetation');
-
+    }
     public function update(Request $request, $id)
     {
 
