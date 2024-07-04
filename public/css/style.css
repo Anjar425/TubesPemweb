@@ -1,62 +1,69 @@
 html {
     scroll-behavior: smooth;
 }
-body{
+
+body {
     padding: 0;
     margin: 0;
 }
 
-header{
+header {
     position: sticky;
     top: 0;
     z-index: 10;
 }
 
-nav{
-    padding: 8px;
+nav {
+    padding: 16px; /* Perbesar padding */
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: auto 50px auto 50px;
+    margin: auto 50px;
 }
 
-.left-nav{
+.left-nav {
     display: flex;
     justify-content: center;
     flex-direction: row;
     gap: 3em;
 }
 
-.logo{
+.logo {
     display: flex;
-    justify-content: center;
+    align-items: center; /* Align items vertically */
     margin: auto;
-    gap: 0.3em;
+    gap: 0.5em;
     cursor: pointer;
 }
-.logo img{
-    width: 40px;
-    height: 40px;
-    margin: auto;
+
+.logo img {
+    width: 60px; /* Perbesar ukuran logo */
+    height: 60px; /* Perbesar ukuran logo */
 }
-.logo p{
+
+.logo p {
     margin: auto;
-    font-size: 25px;
+    font-size: 30px; /* Perbesar ukuran teks logo */
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    color: #f1f1f1;
 }
-.nav-menu{
+
+.nav-menu {
     color: white;
     display: flex;
     flex-direction: row;
     margin: auto;
     gap: 1em;
 }
-.right-nav{
+
+.right-nav {
     display: flex;
     justify-content: center;
     flex-direction: row;
 }
 
-.right-nav .log{
+.right-nav .log {
     display: flex;
     justify-content: center;
     flex-direction: row;
@@ -64,14 +71,11 @@ nav{
     margin: auto;
 }
 
-.log-item, .nav-menuitem{
+.log-item, .nav-menuitem {
     margin: auto;
-    font-size: 18px;
+    font-size: 20px; /* Perbesar ukuran teks navbar */
     color: white;
-    padding-top: auto;
-    padding-bottom: auto;
-    padding-right: 8px;
-    padding-left: 8px;
+    padding: 8px 12px; /* Perbesar padding */
     border-radius: 7px;
     transition: 0.3s;
 }
@@ -94,7 +98,7 @@ nav{
     z-index: 1;
     opacity: 0;
     transform: translateY(-10px);
-    transition: opacity 3s ease, transform 3s ease;
+    transition: opacity 0.3s ease, transform 0.3s ease;
     border-radius: 6px;
 }
 
@@ -123,22 +127,146 @@ nav{
     color: #111827;
 }
 
-main{
+main {
     display: flex;
     flex-direction: column;
     height: auto;
-
+    margin-top: -70px;
 }
 
-.description{
+/* Aturan Global untuk .description */
+.description {
     display: flex;
     flex-direction: column;
     gap: 1.5em;
     width: 500px;
     padding: 70px;
     border-radius: 20px;
-
 }
+
+#main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.sections-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Adjust alignment as needed */
+    gap: 40px; /* Adjust gap between sections */
+    padding-bottom: 2rem;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.section-header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #fff;
+}
+
+/* CSS untuk section2 */
+.section2 .description {
+    background-color: #333; /* Warna latar belakang yang berbeda */
+    border: 1px solid #666; /* Border yang berbeda */
+    padding: 40px; /* Ubah padding */
+    border-radius: 15px; /* Ubah border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
+}
+
+.section2 .description h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 28px; /* Ubah ukuran font */
+    font-weight: bold; /* Tebalkan font */
+    color: #fff; /* Ubah warna font */
+}
+
+.section2 .description img {
+    align-items: center;
+    width: 80%; /* Gambar lebar penuh */
+    border-radius: 10px; /* Border radius untuk gambar */
+    margin: 0 auto;
+}
+
+.section2 .description p {
+    font-size: 18px; /* Ubah ukuran font */
+    color: #ddd; /* Ubah warna font */
+    line-height: 1.6; /* Ubah jarak antar baris */
+    text-align: justify;
+    padding-bottom: 1rem;
+    margin-top: 5px;
+}
+
+.section2 .main-link {
+    background-color: #007BFF; /* Warna latar belakang link utama */
+    color: #fff; /* Warna teks link utama */
+    padding: 12px 24px; /* Ubah padding */
+    border-radius: 8px; /* Ubah border-radius */
+    text-align: center;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+    font-weight: bold;
+}
+
+.section2 .main-link:hover {
+    background-color: #0056b3; /* Warna saat hover */
+}
+
+/* CSS untuk section3 */
+.section3 .description {
+    background-color: #333; /* Warna latar belakang yang berbeda */
+    border: 1px solid #666; /* Border yang berbeda */
+    padding: 40px; /* Ubah padding */
+    border-radius: 15px; /* Ubah border-radius */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tambahkan shadow */
+}
+
+.section3 .description h2 {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    font-size: 28px; /* Ubah ukuran font */
+    font-weight: bold; /* Tebalkan font */
+    color: #fff; /* Ubah warna font */
+}
+
+.section3 .description img {
+    align-items: center;
+    width: 80%; /* Gambar lebar penuh */
+    border-radius: 10px; /* Border radius untuk gambar */
+    margin: 0 auto;
+}
+
+.section3 .description p {
+    font-size: 18px; /* Ubah ukuran font */
+    color: #ddd; /* Ubah warna font */
+    line-height: 1.6; /* Ubah jarak antar baris */
+    text-align: justify;
+    padding-bottom: 1rem;
+    margin-top: 5px;
+}
+
+.section3 .main-link {
+    background-color: #007BFF; /* Warna latar belakang link utama */
+    color: #fff; /* Warna teks link utama */
+    padding: 12px 24px; /* Ubah padding */
+    border-radius: 8px; /* Ubah border-radius */
+    text-align: center;
+    display: inline-block;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.section3 .main-link:hover {
+    background-color: #0056b3; /* Warna saat hover */
+}
+
+
 
 @media (prefers-reduced-motion: no-preference) {
     .description p {
@@ -148,8 +276,6 @@ main{
         animation-timeline: view();
         animation-range: 0% 60%;
     }
-
-
 }
 
 @keyframes slide-in {
@@ -163,17 +289,16 @@ main{
     }
 }
 
-.main, .admin, .region{
+.main, .admin, .region {
     height: 100vh;
     display: flex;
     align-items: center;
 }
 
-.main{
+.main {
     flex-direction: column;
     justify-content: center;
     color: white;
-
 }
 
 @keyframes fade-in-up {
@@ -202,40 +327,66 @@ main{
     animation: fade-in-up 2s forwards;
 }
 
-.fade-out-down {
-    animation: fade-out-down 2s forwards;
+#content {
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
-#content p{
-    font-size: 80px;
+.logo-large {
+    margin-left: 140px;
+    width: 450px; 
+    height: auto;
 }
 
+.text-content {
+    margin-left: 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.site-title {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 50px; 
+    font-weight: 600; 
+    margin: 0;
+}
+
+.site-description {
+    font-family: 'Poppins', sans-serif; 
+    font-size: 20px; 
+    font-weight: 400; 
+    margin-right:150px;
+    text-align: justify;
+}
+    
 @keyframes scale-a-lil {
     from {
-    scale: .5;
+        scale: 0.5;
     }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .description{
-    animation: scale-a-lil linear both;
-    animation-timeline: view();
-    animation-range: 25vh 60vh;
-    }
+    .description {
+        animation: scale-a-lil linear both;
+        animation-timeline: view();
+        animation-range: 25vh 60vh;
+        }
 }
 
-.admin{
+.admin {
     justify-content: end;
     padding-right: 50px;
 }
 
-.region{
-
+.region {
     justify-content: start;
     padding-left: 50px;
 }
 
-.main-link{
+.main-link {
     position: relative;
     background-color: #111827;
     width: 200px;
@@ -247,12 +398,12 @@ main{
     transition: 0.5s;
 }
 
-.main-link:hover{
+.main-link:hover {
     color: white;
     border-radius: 6px;
 }
 
-.main-link::before{
+.main-link::before {
     content: '';
     position: absolute;
     top: 0;
@@ -266,18 +417,31 @@ main{
     transition: transform 0.5s ease;
     transform: scaleX(1);
 }
-.main-link:hover::before{
+
+.main-link:hover::before {
     border-radius: 6px;
     transform-origin: right;
     transition: transform 0.5s ease;
     transform: scaleX(0);
-
 }
 
-footer{
-    height: 50vh;
+.text-gray-300 {
+    color: #e5e7eb; /* Light gray text */
 }
 
+.container {
+    max-width: 1280px; /* Adjust as per your layout */
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
 
+.text-center {
+    text-align: center;
+}
 
-
+.py-4 {
+    padding-top: 2rem; 
+    padding-bottom: 2rem; 
+}

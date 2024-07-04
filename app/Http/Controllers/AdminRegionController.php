@@ -2,16 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RegionalAdminsExport;
-use App\Imports\RegionalAdminsImport;
 use App\Models\Administrator;
 use App\Models\Region;
 use App\Models\RegionalAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Imports\RegionAdminImport;
-use App\Exports\RegionAdminExport; // Import class eksport yang sudah dibuat
-use Maatwebsite\Excel\Facades\Excel; // Import facade Excel
+use App\Exports\RegionAdminExport; 
+use Maatwebsite\Excel\Facades\Excel; 
 
 
 class AdminRegionController extends Controller
@@ -69,7 +67,7 @@ class AdminRegionController extends Controller
             $data->visible_password = $request->password;
             $data->region_id = $request->regions_id;
         $data -> save();
-      
+
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/region-admin');
     }
@@ -94,16 +92,14 @@ class AdminRegionController extends Controller
     public function import(Request $request)
     {
     $request->validate([
-        'file' => 'required|mimes:xlsx,xls|max:2048' // Validate file type
+        'file' => 'required|mimes:xlsx,xls|max:2048' 
     ]);
 
     try {
         Excel::import(new RegionAdminImport(), $request->file('file'));
         
-        // Jika berhasil, tampilkan pesan sukses dan redirect kembali
         return redirect('/region-admin')->with('success', 'Data imported successfully!');
     } catch (\Exception $e) {
-        // Jika terjadi error, tampilkan pesan error dan redirect kembali
         return redirect('/region-admin')->withErrors('Failed to import data: ' . $e->getMessage());
     }
 
