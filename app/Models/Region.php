@@ -12,7 +12,7 @@ class Region extends Model
     protected $table = "regions";
 
     protected $primaryKey = 'id';
-    
+
     protected $fillable = [
         'id',
         'administrator_id',
@@ -23,7 +23,7 @@ class Region extends Model
         'longitude',
         'status',
     ];
-    
+
     public function administrator()
     {
         return $this->belongsTo(Administrator::class);
@@ -33,5 +33,11 @@ class Region extends Model
     {
         return $this->hasMany(RegionalAdmin::class);
     }
+
+    public function coordinates()
+    {
+        return $this->hasMany(Coordinate::class);
+    }
+
 }
 

@@ -10,6 +10,7 @@ use App\Models\Region;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
 
 
 class PlantRegionController extends Controller
@@ -40,44 +41,35 @@ class PlantRegionController extends Controller
     {
         $request->validate([
             'plant_id' => 'required',
-            'region_id' => 'required'
+            'region_id' => 'required',
+            'latitude' => 'required',
+            'longitude' => 'required'
         ]);
-        
-        $existingData = PlantRegion::where('plant_id', $request->plant_id)
-            ->where('region_id', $request->region_id)
-            ->first();
-
-        if ($existingData) {
-            session()->flash('fail', 'Data already exists!');
-            return redirect('/vegetation');
-        } else {
-
-            // $regionId = Auth::guard('regadmin')->user()->region_id;
 
 
-            $data = new PlantRegion();
-            $data->plant_id = $request->plant_id;
-            $data->region_id = $request->region_id;
 
-            $data->save();
-            session()->flash('success', 'Save Data Successfully!');
-            return redirect('/vegetation');
-        }
 
+        // $regionId = Auth::guard('regadmin')->user()->region_id;
+
+
+        $data = new PlantRegion();
+        $data->plant_id = $request->plant_id;
+        $data->region_id = $request->region_id;
+        $data->latitude = $request->latitude;
+        $data->longitude = $request->longitude;
+
+        $data->save();
+        session()->flash('success', 'Save Data Successfully!');
+        return redirect('/vegetation');
     }
     public function update(Request $request, $id)
     {
-        $existingData = PlantRegion::where('plant_id', $request->plant_id)
-            ->where('region_id', $request->region_id)
-            ->first();
 
-        if ($existingData) {
-            session()->flash('fail', 'Data already exists!');
-            return redirect('/vegetation');
-        } else {
-            $data = PlantRegion::where('id', $id)->first();
-            $data->plant_id = $request->plant_id;
-        }
+        $data = PlantRegion::where('id', $id)->first();
+        $data->plant_id = $request->plant_id;
+        $data->latitude = $request->latitude;
+        $data->longitude = $request->longitude;
+
         $data->save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/vegetation');
@@ -106,5 +98,22 @@ class PlantRegionController extends Controller
 
         session()->flash('success', 'Import Data Successfully!');
         return redirect('/vegetation');
+    }
+
+    public function exportPdf()
+    {
+        $userId = Auth::guard('regadmin')->user()->id;
+        $administratorId = Auth::guard('regadmin')->user()->administrator_id;
+
+        $regions = Region::where('administrator_id', $administratorId)->get();
+        $regionIds = $regions->pluck('id');
+
+        $plantRegions = PlantRegion::whereIn('region_id', $regionIds)->with('plant', 'region')->get();
+
+        $pdf = new Mpdf();
+        $html = view('exports.plantregions_pdf', compact('plantRegions'))->render();
+        $pdf->WriteHTML($html);
+
+        return $pdf->Output('plantregions.pdf', 'D');
     }
 }

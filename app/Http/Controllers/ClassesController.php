@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ClassesExport;
+use App\Exports\ClassesExportPdf;
 use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ClassesController extends Controller
 {
@@ -26,24 +29,24 @@ class ClassesController extends Controller
             return redirect('/class');
         } else {
 
-        $regionalAdminId = Auth::guard('regadmin')->user()->id;
+            $regionalAdminId = Auth::guard('regadmin')->user()->id;
 
-        $data = new Classes();
+            $data = new Classes();
             $data->regional_admins_id = $regionalAdminId;
             $data->name = $request->name;
 
-        $data -> save();
-        session()->flash('success', 'Save Data Successfully!');
-        return redirect('/class');
+            $data->save();
+            session()->flash('success', 'Save Data Successfully!');
+            return redirect('/class');
         }
-
     }
+
     public function update(Request $request, $id)
     {
         $data = Classes::where('id', $id)->first();
-            $data->name = $request->name;
+        $data->name = $request->name;
 
-        $data -> save();
+        $data->save();
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/class');
     }
@@ -54,5 +57,16 @@ class ClassesController extends Controller
         $data->delete();
         session()->flash('success', 'Delete Data Successfully!');
         return redirect('/class');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ClassesExport, 'classes.xlsx');
+    }
+
+    public function exportPdf()
+    {
+        $exporter = new ClassesExportPdf();
+        return $exporter->generatePdf();
     }
 }

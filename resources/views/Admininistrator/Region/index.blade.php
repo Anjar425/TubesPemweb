@@ -52,9 +52,16 @@
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->area }}</td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->latitude }}</td>
+                        @foreach ($p->coordinates as $coordinate)
+                            {{ $coordinate->latitude }} <br>
+                        @endforeach
+                    </td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
-                        {{ $p->longitude }}</td>
+                        @foreach ($p->coordinates as $coordinate)
+                            {{ $coordinate->longitude }} <br>
+                        @endforeach
+                    </td>
+                    </td>
                     <td class="p-2 text-center border-b-[1px] text-xs border-b-gray-700 font-normal text-gray-400">
                         {{ $p->status }}</td>
 
@@ -77,13 +84,16 @@
         class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
         data-toggle="modal" data-target="#myModal">Insert</button>
 
-    <a href="/region/export" class="text-xl"> <button
-            class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-            data-toggle="modal" data-target="#myModal">Export</button></a>
+    <a href="{{ url('/region/export') }}" class="text-xl">
+        <button class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+            data-toggle="modal" data-target="#myModal">Export Excel</button>
+    </a>
 
-    <a class="text-xl"> <button onclick="openImportModal()"
-            class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
-            data-toggle="modal" data-target="#myModal">Import</button></a>
+    <a href="{{ url('/region/export-pdf') }}" class="text-xl">
+        <button class="my-3 px-5 py-2.5 rounded-md place-self-start  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+            data-toggle="modal" data-target="#myModal">Export PDF</button>
+    </a>
+
 @endsection
 
 @section('Insert Modal')

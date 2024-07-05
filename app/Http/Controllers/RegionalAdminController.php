@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RegionalAdminsExport;
-use App\Imports\RegionalAdminsImport;
+use App\Exports\RegionalAdminExport;
+use App\Exports\RegionalAdminExportPdf;
+use App\Imports\RegionalAdminImport;
 use App\Models\Administrator;
 use App\Models\Region;
 use App\Models\RegionalAdmin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Imports\RegionAdminImport;
-use App\Exports\RegionAdminExport; // Import class eksport yang sudah dibuat
-use Maatwebsite\Excel\Facades\Excel; // Import facade Excel
+use Maatwebsite\Excel\Facades\Excel;
+use Mpdf\Mpdf;
+use Mpdf\Config\ConfigVariables;
+use Mpdf\Config\FontVariables;
 
 
-class AdminRegionController extends Controller
+class RegionalAdminController extends Controller
 {
     public function index()
     {
@@ -69,7 +71,7 @@ class AdminRegionController extends Controller
             $data->visible_password = $request->password;
             $data->region_id = $request->regions_id;
         $data -> save();
-      
+
         session()->flash('success', 'Edit Data Successfully!');
         return redirect('/region-admin');
     }
@@ -87,7 +89,7 @@ class AdminRegionController extends Controller
         $userId = Auth::guard('administrators')->user()->id;
         $fileName = 'regional_admins_' . date('Ymd_His') . '.xlsx';
 
-        return Excel::download(new RegionAdminExport($userId), $fileName);
+        return Excel::download(new RegionalAdminExport($userId), $fileName);
 
     }
 
@@ -98,8 +100,8 @@ class AdminRegionController extends Controller
     ]);
 
     try {
-        Excel::import(new RegionAdminImport(), $request->file('file'));
-        
+        Excel::import(new RegionalAdminImport(), $request->file('file'));
+
         // Jika berhasil, tampilkan pesan sukses dan redirect kembali
         return redirect('/region-admin')->with('success', 'Data imported successfully!');
     } catch (\Exception $e) {
@@ -107,5 +109,32 @@ class AdminRegionController extends Controller
         return redirect('/region-admin')->withErrors('Failed to import data: ' . $e->getMessage());
     }
 
+    }
+    public function exportPdf()
+    {
+        $userId = Auth::guard('administrators')->user()->id;
+        $regionalAdmins = RegionalAdmin::where('administrator_id', $userId)
+            ->with('region')
+            ->get();
+
+        // Setup mPDF
+        $mpdfConfig = [
+            'mode' => 'utf-8',
+            'format' => 'A4',
+            'orientation' => 'P',
+            'tempDir' => storage_path('tmp'),
+        ];
+
+        $mpdf = new Mpdf($mpdfConfig);
+
+        // Load HTML content from Blade view
+        $html = view('exports.regionaladmin_pdf', compact('regionalAdmins'))->render();
+
+        // Add the HTML to mPDF
+        $mpdf->WriteHTML($html);
+
+        // Output PDF to browser
+        $mpdf->Output('regional_admins.pdf', 'D');
+        exit;
     }
 }

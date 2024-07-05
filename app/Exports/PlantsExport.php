@@ -5,9 +5,14 @@ namespace App\Exports;
 use App\Models\Plant;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
+use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use PhpOffice\PhpSpreadsheet\Style\Alignment;
+use PhpOffice\PhpSpreadsheet\Style\Fill;
+use PhpOffice\PhpSpreadsheet\Style\Border;
+use PhpOffice\PhpSpreadsheet\Style\Font;
 
-
-class PlantsExport implements FromCollection, WithHeadings
+class PlantsExport implements FromCollection, WithHeadings, WithStyles
 {
     /**
     * @return \Illuminate\Support\Collection
@@ -17,6 +22,9 @@ class PlantsExport implements FromCollection, WithHeadings
         return Plant::all();
     }
 
+    /**
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -33,7 +41,52 @@ class PlantsExport implements FromCollection, WithHeadings
             'Watering Frequency',
             'Light Intensity',
             'Created At',
-            'Update At'
+            'Updated At',
         ];
+    }
+
+    /**
+     * @param Worksheet $sheet
+     */
+    public function styles(Worksheet $sheet)
+    {
+        // Style for table headers
+        $sheet->getStyle('A1:N1')->applyFromArray([
+            'font' => [
+                'name' => 'Times New Roman',
+                'bold' => true,
+                'color' => ['rgb' => 'FFFFFF'],
+            ],
+            'alignment' => [
+                'horizontal' => Alignment::HORIZONTAL_CENTER,
+                'vertical' => Alignment::VERTICAL_CENTER,
+            ],
+            'fill' => [
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '006100'],
+            ],
+        ]);
+
+        // Border for table headers and data
+        $sheet->getStyle('A1:N' . $sheet->getHighestRow())
+            ->getBorders()
+            ->getAllBorders()
+            ->setBorderStyle(Border::BORDER_THIN);
+
+        // Center alignment for table headers and data
+        $sheet->getStyle('A1:N' . $sheet->getHighestRow())
+            ->getAlignment()
+            ->setHorizontal(Alignment::HORIZONTAL_CENTER)
+            ->setVertical(Alignment::VERTICAL_CENTER);
+
+        // Font for table data
+        $sheet->getStyle('A2:N' . $sheet->getHighestRow())
+            ->getFont()
+            ->setName('Times New Roman');
+
+        // Autosize columns based on content
+        foreach (range('A', 'N') as $col) {
+            $sheet->getColumnDimension($col)->setAutoSize(true);
+        }
     }
 }
