@@ -16,7 +16,7 @@
                     <p>Logo</p>
                 </div>
                 <ul class="nav-menu">
-                    <li class="nav-menuitem"><a href="#section1" class="nav-link">Blabla</a></li>
+                    <li class="nav-menuitem"><a href="#section1" class="nav-link">Home</a></li>
                     <li class="nav-menuitem"><a href="#section2" class="nav-link">Administrator</a></li>
                     <li class="nav-menuitem"><a href="#section3" class="nav-link">Admin Region</a></li>
                 </ul>
