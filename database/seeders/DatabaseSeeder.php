@@ -16,18 +16,21 @@ class DatabaseSeeder extends Seeder
         // User::factory(10)->create();
         $this->call([
             AdministratorSeeder::class
-            ]);
+        ]);
         $this->call([
             RegionSeeder::class
-            ]);
+        ]);
         $this->call([
             AdminRegionSeeder::class
-            ]);
+        ]);
         $this->call([
             ClassSeeder::class
-            ]);
+        ]);
         $this->call([
             PlantSeeder::class
-            ]);
+        ]);
+        $this->call([
+            PlantRegionSeeder::class
+        ]);
     }
 }

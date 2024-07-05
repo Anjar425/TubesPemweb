@@ -104,7 +104,10 @@ class RegionController extends Controller
 
     public function export()
     {
-        return Excel::download(new RegionExport, 'region.xlsx');
+        $userId = Auth::guard('administrators')->user()->id;
+        $regions = Region::with('coordinates')->where('administrator_id', $userId)->get();
+
+        return Excel::download(new RegionExport($regions), 'region.xlsx');
     }
 
     public function import(Request $request)
@@ -116,6 +119,7 @@ class RegionController extends Controller
 
     public function exportPdf()
     {
+
         $pdfExporter = new RegionExportpdf();
         $pdfExporter->exportPdf();
     }

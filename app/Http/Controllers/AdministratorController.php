@@ -27,7 +27,7 @@ class AdministratorController extends Controller
 
         if ($existingPenduduk) {
             session()->flash('fail', 'Save Data Failed!');
-            return Redirect('/penduduk');
+            return Redirect('/region');
         } else {
 
         $userId = Auth::guard('administrators')->user()->id;

@@ -94,6 +94,16 @@
             data-toggle="modal" data-target="#myModal">Export PDF</button>
     </a>
 
+    <a class="text-xl">
+        <button onclick="openImportModal()"
+            class="my-3 px-5 py-2.5 rounded-md place-self-start bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2"
+            data-toggle="modal" data-target="#myModal">Import</button>
+    </a>
+
+@endsection
+
+@section('Import Modal')
+    @include('Admininistrator.Region.ImportModal')
 @endsection
 
 @section('Insert Modal')

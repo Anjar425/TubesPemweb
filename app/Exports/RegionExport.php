@@ -20,7 +20,27 @@ class RegionExport implements FromCollection, WithHeadings, WithStyles
      */
     public function collection()
     {
-        return Region::all();
+        $regions = Region::with('coordinates')->get();
+
+        $data = [];
+        foreach ($regions as $region) {
+            foreach ($region->coordinates as $coordinate) {
+                $data[] = [
+                    'ID' => $region->id,
+                    'Administrator ID' => $region->administrator_id,
+                    'Name' => $region->name,
+                    'Location' => $region->location,
+                    'Area' => $region->area,
+                    'Latitude' => $coordinate->latitude,
+                    'Longitude' => $coordinate->longitude,
+                    'Status' => $region->status,
+                    'Created At' => $region->created_at,
+                    'Updated At' => $region->updated_at,
+                ];
+            }
+        }
+
+        return new Collection($data);
     }
 
     /**

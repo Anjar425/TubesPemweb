@@ -41,7 +41,6 @@ class PlantRegionController extends Controller
     {
         $request->validate([
             'plant_id' => 'required',
-            'region_id' => 'required',
             'latitude' => 'required',
             'longitude' => 'required'
         ]);
@@ -49,12 +48,12 @@ class PlantRegionController extends Controller
 
 
 
-        // $regionId = Auth::guard('regadmin')->user()->region_id;
+        $regionId = Auth::guard('regadmin')->user()->region_id;
 
 
         $data = new PlantRegion();
         $data->plant_id = $request->plant_id;
-        $data->region_id = $request->region_id;
+        $data->region_id = $regionId;
         $data->latitude = $request->latitude;
         $data->longitude = $request->longitude;
 
@@ -64,6 +63,7 @@ class PlantRegionController extends Controller
     }
     public function update(Request $request, $id)
     {
+
 
         $data = PlantRegion::where('id', $id)->first();
         $data->plant_id = $request->plant_id;
