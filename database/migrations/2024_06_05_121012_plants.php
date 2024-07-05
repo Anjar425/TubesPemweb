@@ -23,7 +23,7 @@ return new class extends Migration
             $table->float('diameter');
             $table->string('leaf_color');
             $table->string('watering_frequency');
-            $table->integer('light_intensity');
+            $table->string('light_intensity');
 
             $table->timestamps();
         });
