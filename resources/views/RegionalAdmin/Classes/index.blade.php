@@ -64,6 +64,11 @@
             data-toggle="modal" data-target="#myModal">Import</button></a>
 @endsection
 
+
+@section('Insert Modal')
+    @include('RegionalAdmin.Classes.ImportModal')
+@endsection
+
 @section('Insert Modal')
     @include('RegionalAdmin.Classes.InsertModal')
 @endsection

@@ -14,6 +14,7 @@ class Classes extends Model
 
     // Define the fillable properties to allow mass assignment
     protected $fillable = [
+        'id',
         'regional_admins_id',
         'name',
     ];

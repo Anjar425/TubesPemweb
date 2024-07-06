@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ClassesExport;
 use App\Exports\ClassesExportPdf;
+use App\Imports\ClassesImport;
 use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -68,5 +69,15 @@ class ClassesController extends Controller
     {
         $exporter = new ClassesExportPdf();
         return $exporter->generatePdf();
+    }
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|file|mimes:xlsx,csv,txt', // Adjust file types as necessary
+        ]);
+
+        Excel::import(new ClassesImport, $request->file('file'));
+        return redirect('/class')->with('success', 'All good!');
     }
 }
