@@ -38,7 +38,7 @@ class RegionSeeder extends Seeder
                     ['latitude' => -7.5015, 'longitude' => 110.2246],
                     ['latitude' => -7.4980, 'longitude' => 110.2255],
                     ['latitude' => -7.4995, 'longitude' => 110.2220],
-                    ['latitude' => -7.5030, 'longitude' => 110.2235],
+                    ['latitude' => -7.5026, 'longitude' => 110.2218],
                 ],
             ],
             // Add more regions as needed
