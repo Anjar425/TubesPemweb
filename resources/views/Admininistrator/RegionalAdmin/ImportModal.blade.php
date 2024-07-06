@@ -13,7 +13,7 @@
             <div class="flex flex-row gap-3">
                 <button type="submit"
                     class="text-white focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800 mb-5">Submit</button>
-                <button type="button" onclick="closeInsertModal()"
+                <button type="button" onclick="closeImportModal()"
                     class="text-blue-600  focus:ring-4 focus:outline-none font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center bg-gray-100 hover:bg-gray-300 focus:ring-gray-600 mb-5">Cancel</button>
             </div>
         </form>
