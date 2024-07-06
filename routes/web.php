@@ -79,6 +79,7 @@ Route::middleware('auth:regadmin')->group(function (){
         Route::post('/insert-class', 'insert');
         Route::post('/{id}/update-class', 'update');
         Route::post('/{id}/delete-class', 'delete');
+        Route::post('/classes/import', 'import');
         Route::get('/classes/export', 'export');
         Route::get('/classes/export-pdf', 'exportPdf');
     });
