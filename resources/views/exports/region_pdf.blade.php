@@ -1,58 +1,57 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
-    <title>Regions Report</title>
+    <title>Regional Admins</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-        }
         table {
             width: 100%;
             border-collapse: collapse;
-            background-color: #c9e2b3; 
-            margin-top: 20px;
         }
         th, td {
-            padding: 10px;
-            text-align: left;
             border: 1px solid black;
+            padding: 8px;
+            text-align: center;
         }
         th {
-            background-color: #006100;
+            background-color: #4CAF50;
             color: white;
-        }
-        h2 {
-            text-align: center;
-            color: #006100;
         }
     </style>
 </head>
 <body>
-    <h2>Regions Report</h2>
+    <h2>Regional Admins</h2>
     <table>
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Administrator ID</th>
                 <th>Name</th>
                 <th>Location</th>
                 <th>Area</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
                 <th>Status</th>
+                <th>Created At</th>
+                <th>Updated At</th>
             </tr>
         </thead>
         <tbody>
             @foreach($regions as $region)
-            <tr>
-                <td>{{ $region->id }}</td>
-                <td>{{ $region->name }}</td>
-                <td>{{ $region->location }}</td>
-                <td>{{ $region->area }}</td>
-                <td>{{ $region->latitude }}</td>
-                <td>{{ $region->longitude }}</td>
-                <td>{{ $region->status }}</td>
-            </tr>
+                @foreach($region->coordinates as $coordinate)
+                    <tr>
+                        <td>{{ $region->id }}</td>
+                        <td>{{ $region->administrator_id }}</td>
+                        <td>{{ $region->name }}</td>
+                        <td>{{ $region->location }}</td>
+                        <td>{{ $region->area }}</td>
+                        <td>{{ $coordinate->latitude }}</td>
+                        <td>{{ $coordinate->longitude }}</td>
+                        <td>{{ $region->status }}</td>
+                        <td>{{ $region->created_at }}</td>
+                        <td>{{ $region->updated_at }}</td>
+                    </tr>
+                @endforeach
             @endforeach
         </tbody>
     </table>

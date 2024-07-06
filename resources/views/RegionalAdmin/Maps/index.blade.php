@@ -24,7 +24,7 @@
 
 </head>
 
-<body class=" min-h-screen bg-gradient-to-tr from-gray-950 from-60% to-gray-800 ">
+<body class="min-h-screen bg-gradient-to-tr from-gray-950 from-60% to-gray-800">
     {{-- @include('Layout.navbar') --}}
 
     <div class='min-h-screen flex flex-row overflow-hidden max-h-screen'>
@@ -37,31 +37,38 @@
                 @include('RegionalAdmin.LinkDashboard')
             </div>
 
-            <div class=' justify-self-end items-center py-10 justify-center flex'>
+            <div class='justify-self-end items-center py-10 justify-center flex'>
                 <form action="/logout" method="POST" class='flex flex-row justify-center items-center'>
                     @csrf
                     <button type="submit" class='text-white font-semibold text-lg'>LOG OUT</button>
                 </form>
-
             </div>
         </aside>
         <div class='w-full min-h-screen max-h-screen flex flex-col h-20 px-10 overflow-hidden overflow-y-auto'>
             <div class="w-full flex flex-col justify-center items-center h-screen">
-                <h1 class="text-center text-xl font-bold my-3 text-white ">MAPS</h1>
+                <h1 class="text-center text-xl font-bold my-3 text-white">MAPS</h1>
                 <div
-                    class=" mb-20 flex flex-col w-11/12 rounded-xl items-center place-content-center bg-gray-800/50 bg-gradient-to-bl from-gray-700/50 via-transparent h-full">
-                    <div class="w-11/12 overflow-x-scroll overscroll-x-auto h-full my-10">
-                        <div id="peta" class=" h-full"></div>
+                    class="mb-20 flex flex-col w-11/12 rounded-xl items-center place-content-center gap-2 bg-gray-800/50 bg-gradient-to-bl from-gray-700/50 via-transparent h-full">
+                    <div class="w-11/12 overflow-x-scroll overscroll-x-auto h-full mt-10">
+                        <div id="peta" class="h-full"></div>
+                        <!-- Container to display coordinates -->
 
                         <!-- CSRF Token -->
                         <meta name="csrf-token" content="{{ csrf_token() }}">
+                    </div>
 
-
+                    <div id="coordinates" class="text-white mb-5 w-full flex flex-col justify-center items-center">
+                        <p>Coordinate</p>
+                        <div class="flex flex-row gap-10">
+                            <p>Latitude : </p>
+                            <p>Longitude : </p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const providerOSM = new GeoSearch.OpenStreetMapProvider();
@@ -80,7 +87,6 @@
                 L.marker([{{ $marker['latitude'] }}, {{ $marker['longitude'] }}]).addTo(leafletMap);
             @endforeach
 
-
             // Fungsi untuk validasi poligon
             function isValidPolygon(coordinates) {
                 return coordinates.length >= 3;
@@ -97,6 +103,19 @@
                     console.error("Invalid polygon coordinates:", polygonCoordinates);
                 }
             @endforeach
+
+            // Event listener for map click
+            leafletMap.on('click', function(e) {
+                var latitude = e.latlng.lat;
+                var longitude = e.latlng.lng;
+                var coordinatesDiv = document.getElementById('coordinates');
+                coordinatesDiv.innerHTML = `
+                    <p>Coordinate</p>
+                    <div class="flex flex-row gap-10">
+                        <p>Latitude : ${latitude}</p>
+                        <p>Longitude : ${longitude}</p>
+                    </div>`;
+            });
         });
     </script>
 </body>

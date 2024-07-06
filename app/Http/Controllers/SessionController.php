@@ -45,8 +45,10 @@ class SessionController extends Controller
     }
 
     public function loginForm (){
-        if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
-            return redirect()->intended('/dashboard');
+        if (Auth::guard('administrators')->check() ) {
+            return redirect()->intended('/region');
+        } else if(Auth::guard('regadmin')->check()){
+            return redirect()->intended('/plants');
         }
         return view("Admininistrator.login");
     }
@@ -67,7 +69,7 @@ class SessionController extends Controller
             // Store the token for later use, if needed
             session(['token' => $token]);
 
-            return redirect()->intended('/dashboard')->withSuccess('Logged in successfully');
+            return redirect()->intended('/region')->withSuccess('Logged in successfully');
         }
 
         return redirect()->intended('/register')->withSuccess('Logged in Failed');
@@ -115,8 +117,10 @@ class SessionController extends Controller
 
 
     public function loginFormRegAdmin(){
-        if (Auth::guard('administrators')->check() || Auth::guard('regadmin')->check()) {
-            return redirect()->intended('/dashboard');
+        if (Auth::guard('administrators')->check() ) {
+            return redirect()->intended('/region');
+        } else if(Auth::guard('regadmin')->check()){
+            return redirect()->intended('/plants');
         }
         return view('RegionalAdmin.login');
     }
@@ -137,7 +141,7 @@ class SessionController extends Controller
             // Store the token for later use, if needed
             session(['token' => $token]);
 
-            return redirect()->intended('/dashboard')->withSuccess('Logged in successfully');
+            return redirect()->intended('/plants')->withSuccess('Logged in successfully');
         }
 
         return redirect()->intended('/login-regadmin')->withSuccess('Logged in Failed');

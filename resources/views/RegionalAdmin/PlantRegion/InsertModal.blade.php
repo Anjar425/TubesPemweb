@@ -5,17 +5,6 @@
             <h2 class=" text-center font-semibold text-lg text-white">Insert Vegetation Region</h2><br>
 
             <div class=" basis-1/2 mb-5">
-                <label for="region_id" class="block mb-2 text-sm font-medium  text-white">Region ID</label>
-                <select name="region_id" type="text" id="region_id"
-                    class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
-                    required>
-                    <option disabled selected>-- Select ID Region --</option>
-                    @foreach ($region as $p)
-                        <option value="{{ $p->id }}">{{ $p->id }} : {{ $p->name }}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class=" basis-1/2 mb-5">
                 <label for="plant_id" class="block mb-2 text-sm font-medium  text-white">Plant ID</label>
                 <select name="plant_id" type="text" id="plant_id"
                     class="border ext-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
